@@ -1,0 +1,107 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client  {
+  provider                        = "prisma-client-js"
+}
+
+generator nestjsDto  {
+  provider                        = "prisma-generator-nestjs-dto"
+  output                          = "../src"
+  outputToNestJsResourceStructure = "true"
+  reExport                        = "true"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://admin:coerce_coping_backlight_lumber_approval_calculate_tuition_sprain_dreamless_caramel@tobiasmesquita.dev:21532/postgres?schema=public"
+}
+
+model User {
+  /// @DtoCreateOptional
+  userId    String @db.Uuid @default(uuid()) @id
+  firstName String
+  lastName  String
+  email     String
+  password  Bytes
+  salt      Bytes
+
+  /// @DtoReadOnly
+  isDeleted Boolean  @default(false)
+  /// @DtoReadOnly
+  createdAt DateTime @default(now())
+  /// @DtoReadOnly
+  updatedAt DateTime @default(now())
+  /// @DtoReadOnly
+  deletedAt DateTime?
+
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
+  roles     UserRole[]
+
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
+  sessions  Session[]
+}
+
+model Role {
+  /// @DtoCreateOptional
+  roleId  String   @db.Uuid @default(uuid()) @id
+  name    String
+
+  /// @DtoReadOnly
+  isDeleted Boolean  @default(false)
+  /// @DtoReadOnly
+  createdAt DateTime @default(now())
+  /// @DtoReadOnly
+  updatedAt DateTime @default(now())
+  /// @DtoReadOnly
+  deletedAt DateTime?
+
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
+  users    UserRole[]
+}
+
+model UserRole {
+  /// @DtoCreateOptional
+  userRoleId String @db.Uuid @default(uuid()) @id
+
+  userId     String @db.Uuid
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
+  user       User   @relation(fields: [userId], references: [userId])
+  roleId     String @db.Uuid
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
+  role       Role   @relation(fields: [roleId], references: [roleId])
+
+
+  /// @DtoReadOnly
+  isDeleted Boolean  @default(false)
+  /// @DtoReadOnly
+  createdAt DateTime @default(now())
+  /// @DtoReadOnly
+  updatedAt DateTime @default(now())
+  /// @DtoReadOnly
+  deletedAt DateTime?
+}
+
+model Session {
+  /// @DtoCreateOptional
+  sessionId String @db.Uuid @default(uuid()) @id
+
+  userId    String @db.Uuid
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
+  user      User   @relation(fields: [userId], references: [userId])
+
+  /// @DtoReadOnly
+  isDeleted Boolean  @default(false)
+  /// @DtoReadOnly
+  createdAt DateTime @default(now())
+  /// @DtoReadOnly
+  updatedAt DateTime @default(now())
+  /// @DtoReadOnly
+  deletedAt DateTime?
+}
