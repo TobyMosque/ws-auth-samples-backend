@@ -6,6 +6,7 @@ import { scrypt } from 'crypto';
 import { promisify } from 'util';
 import { v4 as uid } from 'uuid';
 import { PayloadAuthEntity } from './entities/payload-auth.entity';
+import { LoginAuthResponseDto } from './dto/login-auth-response.dto';
 
 const scryptAsync = promisify(scrypt);
 const jwtOptions: JwtSignOptions = {
@@ -82,7 +83,7 @@ export class AuthService {
         payload,
         Object.assign(options, jwtOptions),
       ),
-    };
+    } as LoginAuthResponseDto;
   }
 
   async logout(payload: PayloadAuthEntity) {

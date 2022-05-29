@@ -71,7 +71,14 @@
         },
         "responses": {
           "201": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginAuthResponseDto"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -1729,6 +1736,17 @@
         "required": [
           "username",
           "password"
+        ]
+      },
+      "LoginAuthResponseDto": {
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "accessToken"
         ]
       },
       "Session": {
