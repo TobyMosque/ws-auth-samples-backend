@@ -7,6 +7,9 @@ import { UserModule } from 'src/modules/user/user.module';
 import { RoleModule } from 'src/modules/role/role.module';
 import { UserRoleModule } from 'src/modules/userRole/user-role.module';
 import { SessionModule } from 'src/modules/session/session.module';
+import { PersonModule } from 'src/modules/person/person.module';
+import { CompanyModule } from 'src/modules/company/company.module';
+import { JobModule } from 'src/modules/job/job.module';
 import { JwtStrategy } from 'src/strategies/jwt.strategy';
 
 @Module({
@@ -16,6 +19,9 @@ import { JwtStrategy } from 'src/strategies/jwt.strategy';
     RoleModule,
     UserRoleModule,
     SessionModule,
+    PersonModule,
+    CompanyModule,
+    JobModule,
     ConfigModule.forRoot(),
   ],
   controllers: [AppController],

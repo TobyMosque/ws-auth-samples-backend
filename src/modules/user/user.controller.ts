@@ -17,9 +17,11 @@ import { CreateUserDto, UpdateUserDto } from './dto';
 import { QueryObjectTrasform } from 'src/pipes/object.transform';
 import { UserQueryResponseDto } from './dto/response.dto';
 import { Public } from 'src/decorators/public.decorator';
+import { Role } from 'src/decorators/role.decorator';
 
 @ApiTags('user')
 @Controller('user')
+@Role('admin')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
@@ -68,6 +70,7 @@ export class UserController {
   }
 
   @Delete(':id')
+  @Role('developer')
   @ApiQuery({ name: 'rev', required: false })
   async delete(@Param('id') id: string) {
     const result = await this.userService.delete(id);

@@ -5,6 +5,9 @@ import { UserModule } from './modules/user/user.module';
 import { RoleModule } from './modules/role/role.module';
 import { UserRoleModule } from './modules/userRole/user-role.module';
 import { SessionModule } from './modules/session/session.module';
+import { PersonModule } from 'src/modules/person/person.module';
+import { CompanyModule } from 'src/modules/company/company.module';
+import { JobModule } from 'src/modules/job/job.module';
 import { INestApplication } from '@nestjs/common';
 import { writeFile } from 'fs';
 import { promisify } from 'util';
@@ -38,6 +41,9 @@ export async function getOpenApiSpec({ app }: GetOpenApiSpecParams = {}) {
       RoleModule,
       UserRoleModule,
       SessionModule,
+      PersonModule,
+      CompanyModule,
+      JobModule,
     ],
     operationIdFactory(controllerKey, methodKey) {
       return methodKey;

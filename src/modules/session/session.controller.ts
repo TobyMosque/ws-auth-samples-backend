@@ -19,6 +19,7 @@ import { Session } from './entities';
 import { CreateSessionDto, UpdateSessionDto } from './dto';
 import { QueryObjectTrasform } from 'src/pipes/object.transform';
 import { SessionQueryResponseDto } from './dto/response.dto';
+import { Role } from 'src/decorators/role.decorator';
 
 @ApiTags('session')
 @Controller('session')
@@ -26,6 +27,7 @@ export class SessionController {
   constructor(private readonly sessionService: SessionService) {}
 
   @Get(':id')
+  @Role('admin')
   find(
     @Param('id') id: string,
     @Query(QueryObjectTrasform) params: SessionFindRequestDto,
@@ -34,6 +36,7 @@ export class SessionController {
   }
 
   @Get()
+  @Role('admin')
   @ApiQuery({ name: 'count', required: false })
   @ApiOkResponse({ type: () => SessionQueryResponseDto })
   query(

@@ -1,1 +1,2771 @@
-{"openapi":"3.0.0","paths":{"/api/profile":{"get":{"operationId":"getProfile","parameters":[],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/PayloadAuthEntity"}}}}}}},"/api/auth/login":{"post":{"operationId":"login","parameters":[],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/LoginAuthDto"}}}},"responses":{"201":{"description":""}},"tags":["auth"]}},"/api/auth/logout":{"delete":{"operationId":"logout","parameters":[],"responses":{"200":{"description":""}},"tags":["auth"]}},"/api/user/{id}":{"get":{"operationId":"find","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}},{"name":"select","required":false,"in":"query","schema":{}},{"name":"include","required":false,"in":"query","schema":{}}],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/User"}}}}},"tags":["user"]},"put":{"operationId":"update","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}},{"name":"rev","required":false,"in":"query","schema":{}}],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/UpdateUserDto"}}}},"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/User"}}}}},"tags":["user"]},"delete":{"operationId":"delete","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}},{"name":"rev","required":false,"in":"query","schema":{}}],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"type":"object"}}}}},"tags":["user"]}},"/api/user":{"get":{"operationId":"query","parameters":[{"name":"take","required":false,"in":"query","schema":{"type":"number"}},{"name":"skip","required":false,"in":"query","schema":{"type":"number"}},{"name":"where","required":false,"in":"query","schema":{}},{"name":"cursor","required":false,"in":"query","schema":{}},{"name":"orderBy","required":false,"in":"query","schema":{}},{"name":"select","required":false,"in":"query","schema":{}},{"name":"include","required":false,"in":"query","schema":{}},{"name":"count","required":false,"in":"query","schema":{"type":"boolean"}}],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/UserQueryResponseDto"}}}}},"tags":["user"]},"put":{"operationId":"create","parameters":[],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CreateUserDto"}}}},"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/User"}}}}},"tags":["user"]}},"/api/session/{id}":{"get":{"operationId":"find","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}},{"name":"select","required":false,"in":"query","schema":{}},{"name":"include","required":false,"in":"query","schema":{}}],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Session"}}}}},"tags":["session"]},"put":{"operationId":"update","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}},{"name":"rev","required":false,"in":"query","schema":{}}],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/UpdateSessionDto"}}}},"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Session"}}}}},"tags":["session"]},"delete":{"operationId":"delete","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}},{"name":"rev","required":false,"in":"query","schema":{}}],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"type":"object"}}}}},"tags":["session"]}},"/api/session":{"get":{"operationId":"query","parameters":[{"name":"take","required":false,"in":"query","schema":{"type":"number"}},{"name":"skip","required":false,"in":"query","schema":{"type":"number"}},{"name":"where","required":false,"in":"query","schema":{}},{"name":"cursor","required":false,"in":"query","schema":{}},{"name":"orderBy","required":false,"in":"query","schema":{}},{"name":"select","required":false,"in":"query","schema":{}},{"name":"include","required":false,"in":"query","schema":{}},{"name":"count","required":false,"in":"query","schema":{"type":"boolean"}}],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/SessionQueryResponseDto"}}}}},"tags":["session"]},"put":{"operationId":"create","parameters":[],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CreateSessionDto"}}}},"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Session"}}}}},"tags":["session"]}},"/api/role/{id}":{"get":{"operationId":"find","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}},{"name":"select","required":false,"in":"query","schema":{}},{"name":"include","required":false,"in":"query","schema":{}}],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Role"}}}}},"tags":["role"]},"put":{"operationId":"update","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}},{"name":"rev","required":false,"in":"query","schema":{}}],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/UpdateRoleDto"}}}},"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Role"}}}}},"tags":["role"]},"delete":{"operationId":"delete","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}},{"name":"rev","required":false,"in":"query","schema":{}}],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"type":"object"}}}}},"tags":["role"]}},"/api/role":{"get":{"operationId":"query","parameters":[{"name":"take","required":false,"in":"query","schema":{"type":"number"}},{"name":"skip","required":false,"in":"query","schema":{"type":"number"}},{"name":"where","required":false,"in":"query","schema":{}},{"name":"cursor","required":false,"in":"query","schema":{}},{"name":"orderBy","required":false,"in":"query","schema":{}},{"name":"select","required":false,"in":"query","schema":{}},{"name":"include","required":false,"in":"query","schema":{}},{"name":"count","required":false,"in":"query","schema":{"type":"boolean"}}],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/RoleQueryResponseDto"}}}}},"tags":["role"]},"put":{"operationId":"create","parameters":[],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CreateRoleDto"}}}},"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Role"}}}}},"tags":["role"]}},"/api/user-role/{id}":{"get":{"operationId":"find","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}},{"name":"select","required":false,"in":"query","schema":{}},{"name":"include","required":false,"in":"query","schema":{}}],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/UserRole"}}}}},"tags":["user-role"]},"put":{"operationId":"update","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}},{"name":"rev","required":false,"in":"query","schema":{}}],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/UpdateUserRoleDto"}}}},"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/UserRole"}}}}},"tags":["user-role"]},"delete":{"operationId":"delete","parameters":[{"name":"id","required":true,"in":"path","schema":{"type":"string"}},{"name":"rev","required":false,"in":"query","schema":{}}],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"type":"object"}}}}},"tags":["user-role"]}},"/api/user-role":{"get":{"operationId":"query","parameters":[{"name":"take","required":false,"in":"query","schema":{"type":"number"}},{"name":"skip","required":false,"in":"query","schema":{"type":"number"}},{"name":"where","required":false,"in":"query","schema":{}},{"name":"cursor","required":false,"in":"query","schema":{}},{"name":"orderBy","required":false,"in":"query","schema":{}},{"name":"select","required":false,"in":"query","schema":{}},{"name":"include","required":false,"in":"query","schema":{}},{"name":"count","required":false,"in":"query","schema":{"type":"boolean"}}],"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/UserRoleQueryResponseDto"}}}}},"tags":["user-role"]},"put":{"operationId":"create","parameters":[],"requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CreateUserRoleDto"}}}},"responses":{"200":{"description":"","content":{"application/json":{"schema":{"$ref":"#/components/schemas/UserRole"}}}}},"tags":["user-role"]}}},"info":{"title":"Quasar Nest example","description":"The cats API description","version":"1.0","contact":{}},"tags":[],"servers":[],"components":{"securitySchemes":{"access-token":{"scheme":"bearer","bearerFormat":"JWT","type":"http"}},"schemas":{"PayloadAuthEntity":{"type":"object","properties":{"jti":{"type":"string"},"sub":{"type":"string"},"name":{"type":"string"},"email":{"type":"string"},"roles":{"type":"array","items":{"type":"string"}}},"required":["jti","sub","name","email","roles"]},"LoginAuthDto":{"type":"object","properties":{"username":{"type":"string"},"password":{"type":"string"}},"required":["username","password"]},"Session":{"type":"object","properties":{"sessionId":{"type":"string"},"userId":{"type":"string"},"user":{"$ref":"#/components/schemas/User"},"isDeleted":{"type":"boolean"},"createdAt":{"format":"date-time","type":"string"},"updatedAt":{"format":"date-time","type":"string"},"deletedAt":{"format":"date-time","type":"string","nullable":true}},"required":["sessionId","userId","isDeleted","createdAt","updatedAt","deletedAt"]},"User":{"type":"object","properties":{"userId":{"type":"string"},"firstName":{"type":"string"},"lastName":{"type":"string"},"email":{"type":"string"},"password":{"type":"object"},"salt":{"type":"object"},"isDeleted":{"type":"boolean"},"createdAt":{"format":"date-time","type":"string"},"updatedAt":{"format":"date-time","type":"string"},"deletedAt":{"format":"date-time","type":"string","nullable":true},"roles":{"type":"array","items":{"$ref":"#/components/schemas/UserRole"}},"sessions":{"type":"array","items":{"$ref":"#/components/schemas/Session"}}},"required":["userId","firstName","lastName","email","password","salt","isDeleted","createdAt","updatedAt","deletedAt"]},"Role":{"type":"object","properties":{"roleId":{"type":"string"},"name":{"type":"string"},"isDeleted":{"type":"boolean"},"createdAt":{"format":"date-time","type":"string"},"updatedAt":{"format":"date-time","type":"string"},"deletedAt":{"format":"date-time","type":"string","nullable":true},"users":{"type":"array","items":{"$ref":"#/components/schemas/UserRole"}}},"required":["roleId","name","isDeleted","createdAt","updatedAt","deletedAt"]},"UserRole":{"type":"object","properties":{"userRoleId":{"type":"string"},"userId":{"type":"string"},"user":{"$ref":"#/components/schemas/User"},"roleId":{"type":"string"},"role":{"$ref":"#/components/schemas/Role"},"isDeleted":{"type":"boolean"},"createdAt":{"format":"date-time","type":"string"},"updatedAt":{"format":"date-time","type":"string"},"deletedAt":{"format":"date-time","type":"string","nullable":true}},"required":["userRoleId","userId","roleId","isDeleted","createdAt","updatedAt","deletedAt"]},"UserQueryResponseDto":{"type":"object","properties":{"data":{"type":"array","items":{"$ref":"#/components/schemas/User"}},"count":{"type":"number"}},"required":["data"]},"ConnectUserRoleDto":{"type":"object","properties":{"userRoleId":{"type":"string"}},"required":["userRoleId"]},"CreateUserRolesRelationInputDto":{"type":"object","properties":{"connect":{"type":"array","items":{"$ref":"#/components/schemas/ConnectUserRoleDto"}}},"required":["connect"]},"ConnectSessionDto":{"type":"object","properties":{"sessionId":{"type":"string"}},"required":["sessionId"]},"CreateUserSessionsRelationInputDto":{"type":"object","properties":{"connect":{"type":"array","items":{"$ref":"#/components/schemas/ConnectSessionDto"}}},"required":["connect"]},"CreateUserDto":{"type":"object","properties":{"userId":{"type":"string"},"firstName":{"type":"string"},"lastName":{"type":"string"},"email":{"type":"string"},"password":{"type":"object"},"salt":{"type":"object"},"roles":{"$ref":"#/components/schemas/CreateUserRolesRelationInputDto"},"sessions":{"$ref":"#/components/schemas/CreateUserSessionsRelationInputDto"}},"required":["firstName","lastName","email","password","salt"]},"UpdateUserRolesRelationInputDto":{"type":"object","properties":{"connect":{"type":"array","items":{"$ref":"#/components/schemas/ConnectUserRoleDto"}}},"required":["connect"]},"UpdateUserSessionsRelationInputDto":{"type":"object","properties":{"connect":{"type":"array","items":{"$ref":"#/components/schemas/ConnectSessionDto"}}},"required":["connect"]},"UpdateUserDto":{"type":"object","properties":{"firstName":{"type":"string"},"lastName":{"type":"string"},"email":{"type":"string"},"password":{"type":"object"},"salt":{"type":"object"},"roles":{"$ref":"#/components/schemas/UpdateUserRolesRelationInputDto"},"sessions":{"$ref":"#/components/schemas/UpdateUserSessionsRelationInputDto"}}},"SessionQueryResponseDto":{"type":"object","properties":{"data":{"type":"array","items":{"$ref":"#/components/schemas/Session"}},"count":{"type":"number"}},"required":["data"]},"ConnectUserDto":{"type":"object","properties":{"userId":{"type":"string"}},"required":["userId"]},"CreateSessionUserRelationInputDto":{"type":"object","properties":{"connect":{"$ref":"#/components/schemas/ConnectUserDto"}},"required":["connect"]},"CreateSessionDto":{"type":"object","properties":{"sessionId":{"type":"string"},"user":{"$ref":"#/components/schemas/CreateSessionUserRelationInputDto"}},"required":["user"]},"UpdateSessionUserRelationInputDto":{"type":"object","properties":{"connect":{"$ref":"#/components/schemas/ConnectUserDto"}},"required":["connect"]},"UpdateSessionDto":{"type":"object","properties":{"user":{"$ref":"#/components/schemas/UpdateSessionUserRelationInputDto"}}},"RoleQueryResponseDto":{"type":"object","properties":{"data":{"type":"array","items":{"$ref":"#/components/schemas/Role"}},"count":{"type":"number"}},"required":["data"]},"CreateRoleUsersRelationInputDto":{"type":"object","properties":{"connect":{"type":"array","items":{"$ref":"#/components/schemas/ConnectUserRoleDto"}}},"required":["connect"]},"CreateRoleDto":{"type":"object","properties":{"roleId":{"type":"string"},"name":{"type":"string"},"users":{"$ref":"#/components/schemas/CreateRoleUsersRelationInputDto"}},"required":["name"]},"UpdateRoleUsersRelationInputDto":{"type":"object","properties":{"connect":{"type":"array","items":{"$ref":"#/components/schemas/ConnectUserRoleDto"}}},"required":["connect"]},"UpdateRoleDto":{"type":"object","properties":{"name":{"type":"string"},"users":{"$ref":"#/components/schemas/UpdateRoleUsersRelationInputDto"}}},"UserRoleQueryResponseDto":{"type":"object","properties":{"data":{"type":"array","items":{"$ref":"#/components/schemas/UserRole"}},"count":{"type":"number"}},"required":["data"]},"CreateUserRoleUserRelationInputDto":{"type":"object","properties":{"connect":{"$ref":"#/components/schemas/ConnectUserDto"}},"required":["connect"]},"ConnectRoleDto":{"type":"object","properties":{"roleId":{"type":"string"}},"required":["roleId"]},"CreateUserRoleRoleRelationInputDto":{"type":"object","properties":{"connect":{"$ref":"#/components/schemas/ConnectRoleDto"}},"required":["connect"]},"CreateUserRoleDto":{"type":"object","properties":{"userRoleId":{"type":"string"},"user":{"$ref":"#/components/schemas/CreateUserRoleUserRelationInputDto"},"role":{"$ref":"#/components/schemas/CreateUserRoleRoleRelationInputDto"}},"required":["user","role"]},"UpdateUserRoleUserRelationInputDto":{"type":"object","properties":{"connect":{"$ref":"#/components/schemas/ConnectUserDto"}},"required":["connect"]},"UpdateUserRoleRoleRelationInputDto":{"type":"object","properties":{"connect":{"$ref":"#/components/schemas/ConnectRoleDto"}},"required":["connect"]},"UpdateUserRoleDto":{"type":"object","properties":{"user":{"$ref":"#/components/schemas/UpdateUserRoleUserRelationInputDto"},"role":{"$ref":"#/components/schemas/UpdateUserRoleRoleRelationInputDto"}}}}},"security":[{"access-token":[]}]}
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/profile": {
+      "get": {
+        "operationId": "getProfile",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PayloadAuthEntity"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/is-admin": {
+      "get": {
+        "operationId": "isAdmin",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/is-developer": {
+      "get": {
+        "operationId": "isDeveloper",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "operationId": "login",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginAuthDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/api/auth/logout": {
+      "delete": {
+        "operationId": "logout",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/api/user/{id}": {
+      "get": {
+        "operationId": "find",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "select",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "include",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "user"
+        ]
+      },
+      "put": {
+        "operationId": "update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "rev",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "user"
+        ]
+      },
+      "delete": {
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "rev",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "user"
+        ]
+      }
+    },
+    "/api/user": {
+      "get": {
+        "operationId": "query",
+        "parameters": [
+          {
+            "name": "take",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "skip",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "where",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "cursor",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "orderBy",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "select",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "include",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "count",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserQueryResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "user"
+        ]
+      },
+      "put": {
+        "operationId": "create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "user"
+        ]
+      }
+    },
+    "/api/session/{id}": {
+      "get": {
+        "operationId": "find",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "select",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "include",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Session"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "session"
+        ]
+      },
+      "put": {
+        "operationId": "update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "rev",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSessionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Session"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "session"
+        ]
+      },
+      "delete": {
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "rev",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "session"
+        ]
+      }
+    },
+    "/api/session": {
+      "get": {
+        "operationId": "query",
+        "parameters": [
+          {
+            "name": "take",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "skip",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "where",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "cursor",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "orderBy",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "select",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "include",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "count",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionQueryResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "session"
+        ]
+      },
+      "put": {
+        "operationId": "create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSessionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Session"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "session"
+        ]
+      }
+    },
+    "/api/role/{id}": {
+      "get": {
+        "operationId": "find",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "select",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "include",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Role"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "role"
+        ]
+      },
+      "put": {
+        "operationId": "update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "rev",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRoleDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Role"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "role"
+        ]
+      },
+      "delete": {
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "rev",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "role"
+        ]
+      }
+    },
+    "/api/role": {
+      "get": {
+        "operationId": "query",
+        "parameters": [
+          {
+            "name": "take",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "skip",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "where",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "cursor",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "orderBy",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "select",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "include",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "count",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoleQueryResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "role"
+        ]
+      },
+      "put": {
+        "operationId": "create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRoleDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Role"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "role"
+        ]
+      }
+    },
+    "/api/user-role/{id}": {
+      "get": {
+        "operationId": "find",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "select",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "include",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserRole"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "user-role"
+        ]
+      },
+      "put": {
+        "operationId": "update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "rev",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserRoleDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserRole"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "user-role"
+        ]
+      },
+      "delete": {
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "rev",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "user-role"
+        ]
+      }
+    },
+    "/api/user-role": {
+      "get": {
+        "operationId": "query",
+        "parameters": [
+          {
+            "name": "take",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "skip",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "where",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "cursor",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "orderBy",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "select",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "include",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "count",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserRoleQueryResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "user-role"
+        ]
+      },
+      "put": {
+        "operationId": "create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserRoleDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserRole"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "user-role"
+        ]
+      }
+    },
+    "/api/person/{id}": {
+      "get": {
+        "operationId": "find",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "select",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "include",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Person"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "person"
+        ]
+      },
+      "put": {
+        "operationId": "update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "rev",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePersonDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Person"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "person"
+        ]
+      },
+      "delete": {
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "rev",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "person"
+        ]
+      }
+    },
+    "/api/person": {
+      "get": {
+        "operationId": "query",
+        "parameters": [
+          {
+            "name": "take",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "skip",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "where",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "cursor",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "orderBy",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "select",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "include",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "count",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonQueryResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "person"
+        ]
+      },
+      "put": {
+        "operationId": "create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePersonDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Person"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "person"
+        ]
+      }
+    },
+    "/api/company/{id}": {
+      "get": {
+        "operationId": "find",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "select",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "include",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Company"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "company"
+        ]
+      },
+      "put": {
+        "operationId": "update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "rev",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCompanyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Company"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "company"
+        ]
+      },
+      "delete": {
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "rev",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "company"
+        ]
+      }
+    },
+    "/api/company": {
+      "get": {
+        "operationId": "query",
+        "parameters": [
+          {
+            "name": "take",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "skip",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "where",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "cursor",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "orderBy",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "select",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "include",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "count",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompanyQueryResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "company"
+        ]
+      },
+      "put": {
+        "operationId": "create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCompanyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Company"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "company"
+        ]
+      }
+    },
+    "/api/job/{id}": {
+      "get": {
+        "operationId": "find",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "select",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "include",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "job"
+        ]
+      },
+      "put": {
+        "operationId": "update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "rev",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateJobDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "job"
+        ]
+      },
+      "delete": {
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "rev",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "job"
+        ]
+      }
+    },
+    "/api/job": {
+      "get": {
+        "operationId": "query",
+        "parameters": [
+          {
+            "name": "take",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "skip",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "where",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "cursor",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "orderBy",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "select",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "include",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "count",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobQueryResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "job"
+        ]
+      },
+      "put": {
+        "operationId": "create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateJobDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "job"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Quasar Nest example",
+    "description": "The cats API description",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "access-token": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "PayloadAuthEntity": {
+        "type": "object",
+        "properties": {
+          "jti": {
+            "type": "string"
+          },
+          "sub": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "jti",
+          "sub",
+          "name",
+          "email",
+          "roles"
+        ]
+      },
+      "LoginAuthDto": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "username",
+          "password"
+        ]
+      },
+      "Session": {
+        "type": "object",
+        "properties": {
+          "sessionId": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          },
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "deletedAt": {
+            "format": "date-time",
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "sessionId",
+          "userId",
+          "isDeleted",
+          "createdAt",
+          "updatedAt",
+          "deletedAt"
+        ]
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "object"
+          },
+          "salt": {
+            "type": "object"
+          },
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "deletedAt": {
+            "format": "date-time",
+            "type": "string",
+            "nullable": true
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserRole"
+            }
+          },
+          "sessions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Session"
+            }
+          }
+        },
+        "required": [
+          "userId",
+          "firstName",
+          "lastName",
+          "email",
+          "password",
+          "salt",
+          "isDeleted",
+          "createdAt",
+          "updatedAt",
+          "deletedAt"
+        ]
+      },
+      "Role": {
+        "type": "object",
+        "properties": {
+          "roleId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "deletedAt": {
+            "format": "date-time",
+            "type": "string",
+            "nullable": true
+          },
+          "users": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserRole"
+            }
+          }
+        },
+        "required": [
+          "roleId",
+          "name",
+          "isDeleted",
+          "createdAt",
+          "updatedAt",
+          "deletedAt"
+        ]
+      },
+      "UserRole": {
+        "type": "object",
+        "properties": {
+          "userRoleId": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          },
+          "roleId": {
+            "type": "string"
+          },
+          "role": {
+            "$ref": "#/components/schemas/Role"
+          },
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "deletedAt": {
+            "format": "date-time",
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "userRoleId",
+          "userId",
+          "roleId",
+          "isDeleted",
+          "createdAt",
+          "updatedAt",
+          "deletedAt"
+        ]
+      },
+      "UserQueryResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/User"
+            }
+          },
+          "count": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "ConnectUserRoleDto": {
+        "type": "object",
+        "properties": {
+          "userRoleId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "userRoleId"
+        ]
+      },
+      "CreateUserRolesRelationInputDto": {
+        "type": "object",
+        "properties": {
+          "connect": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConnectUserRoleDto"
+            }
+          }
+        },
+        "required": [
+          "connect"
+        ]
+      },
+      "ConnectSessionDto": {
+        "type": "object",
+        "properties": {
+          "sessionId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "sessionId"
+        ]
+      },
+      "CreateUserSessionsRelationInputDto": {
+        "type": "object",
+        "properties": {
+          "connect": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConnectSessionDto"
+            }
+          }
+        },
+        "required": [
+          "connect"
+        ]
+      },
+      "CreateUserDto": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "object"
+          },
+          "salt": {
+            "type": "object"
+          },
+          "roles": {
+            "$ref": "#/components/schemas/CreateUserRolesRelationInputDto"
+          },
+          "sessions": {
+            "$ref": "#/components/schemas/CreateUserSessionsRelationInputDto"
+          }
+        },
+        "required": [
+          "firstName",
+          "lastName",
+          "email",
+          "password",
+          "salt"
+        ]
+      },
+      "UpdateUserRolesRelationInputDto": {
+        "type": "object",
+        "properties": {
+          "connect": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConnectUserRoleDto"
+            }
+          }
+        },
+        "required": [
+          "connect"
+        ]
+      },
+      "UpdateUserSessionsRelationInputDto": {
+        "type": "object",
+        "properties": {
+          "connect": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConnectSessionDto"
+            }
+          }
+        },
+        "required": [
+          "connect"
+        ]
+      },
+      "UpdateUserDto": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "object"
+          },
+          "salt": {
+            "type": "object"
+          },
+          "roles": {
+            "$ref": "#/components/schemas/UpdateUserRolesRelationInputDto"
+          },
+          "sessions": {
+            "$ref": "#/components/schemas/UpdateUserSessionsRelationInputDto"
+          }
+        }
+      },
+      "SessionQueryResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Session"
+            }
+          },
+          "count": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "ConnectUserDto": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "userId"
+        ]
+      },
+      "CreateSessionUserRelationInputDto": {
+        "type": "object",
+        "properties": {
+          "connect": {
+            "$ref": "#/components/schemas/ConnectUserDto"
+          }
+        },
+        "required": [
+          "connect"
+        ]
+      },
+      "CreateSessionDto": {
+        "type": "object",
+        "properties": {
+          "sessionId": {
+            "type": "string"
+          },
+          "user": {
+            "$ref": "#/components/schemas/CreateSessionUserRelationInputDto"
+          }
+        },
+        "required": [
+          "user"
+        ]
+      },
+      "UpdateSessionUserRelationInputDto": {
+        "type": "object",
+        "properties": {
+          "connect": {
+            "$ref": "#/components/schemas/ConnectUserDto"
+          }
+        },
+        "required": [
+          "connect"
+        ]
+      },
+      "UpdateSessionDto": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/UpdateSessionUserRelationInputDto"
+          }
+        }
+      },
+      "RoleQueryResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Role"
+            }
+          },
+          "count": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "CreateRoleUsersRelationInputDto": {
+        "type": "object",
+        "properties": {
+          "connect": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConnectUserRoleDto"
+            }
+          }
+        },
+        "required": [
+          "connect"
+        ]
+      },
+      "CreateRoleDto": {
+        "type": "object",
+        "properties": {
+          "roleId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "users": {
+            "$ref": "#/components/schemas/CreateRoleUsersRelationInputDto"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "UpdateRoleUsersRelationInputDto": {
+        "type": "object",
+        "properties": {
+          "connect": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConnectUserRoleDto"
+            }
+          }
+        },
+        "required": [
+          "connect"
+        ]
+      },
+      "UpdateRoleDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "users": {
+            "$ref": "#/components/schemas/UpdateRoleUsersRelationInputDto"
+          }
+        }
+      },
+      "UserRoleQueryResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserRole"
+            }
+          },
+          "count": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "CreateUserRoleUserRelationInputDto": {
+        "type": "object",
+        "properties": {
+          "connect": {
+            "$ref": "#/components/schemas/ConnectUserDto"
+          }
+        },
+        "required": [
+          "connect"
+        ]
+      },
+      "ConnectRoleDto": {
+        "type": "object",
+        "properties": {
+          "roleId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "roleId"
+        ]
+      },
+      "CreateUserRoleRoleRelationInputDto": {
+        "type": "object",
+        "properties": {
+          "connect": {
+            "$ref": "#/components/schemas/ConnectRoleDto"
+          }
+        },
+        "required": [
+          "connect"
+        ]
+      },
+      "CreateUserRoleDto": {
+        "type": "object",
+        "properties": {
+          "userRoleId": {
+            "type": "string"
+          },
+          "user": {
+            "$ref": "#/components/schemas/CreateUserRoleUserRelationInputDto"
+          },
+          "role": {
+            "$ref": "#/components/schemas/CreateUserRoleRoleRelationInputDto"
+          }
+        },
+        "required": [
+          "user",
+          "role"
+        ]
+      },
+      "UpdateUserRoleUserRelationInputDto": {
+        "type": "object",
+        "properties": {
+          "connect": {
+            "$ref": "#/components/schemas/ConnectUserDto"
+          }
+        },
+        "required": [
+          "connect"
+        ]
+      },
+      "UpdateUserRoleRoleRelationInputDto": {
+        "type": "object",
+        "properties": {
+          "connect": {
+            "$ref": "#/components/schemas/ConnectRoleDto"
+          }
+        },
+        "required": [
+          "connect"
+        ]
+      },
+      "UpdateUserRoleDto": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/UpdateUserRoleUserRelationInputDto"
+          },
+          "role": {
+            "$ref": "#/components/schemas/UpdateUserRoleRoleRelationInputDto"
+          }
+        }
+      },
+      "Company": {
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "people": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Person"
+            }
+          },
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "deletedAt": {
+            "format": "date-time",
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "companyId",
+          "name",
+          "isDeleted",
+          "createdAt",
+          "updatedAt",
+          "deletedAt"
+        ]
+      },
+      "Person": {
+        "type": "object",
+        "properties": {
+          "personId": {
+            "type": "string"
+          },
+          "avatar": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "jobId": {
+            "type": "string"
+          },
+          "job": {
+            "$ref": "#/components/schemas/Job"
+          },
+          "companyId": {
+            "type": "string"
+          },
+          "company": {
+            "$ref": "#/components/schemas/Company"
+          },
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "deletedAt": {
+            "format": "date-time",
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "personId",
+          "avatar",
+          "firstName",
+          "lastName",
+          "email",
+          "jobId",
+          "companyId",
+          "isDeleted",
+          "createdAt",
+          "updatedAt",
+          "deletedAt"
+        ]
+      },
+      "Job": {
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "people": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Person"
+            }
+          },
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "deletedAt": {
+            "format": "date-time",
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "jobId",
+          "name",
+          "isDeleted",
+          "createdAt",
+          "updatedAt",
+          "deletedAt"
+        ]
+      },
+      "PersonQueryResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Person"
+            }
+          },
+          "count": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "ConnectJobDto": {
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "jobId"
+        ]
+      },
+      "CreatePersonJobRelationInputDto": {
+        "type": "object",
+        "properties": {
+          "connect": {
+            "$ref": "#/components/schemas/ConnectJobDto"
+          }
+        },
+        "required": [
+          "connect"
+        ]
+      },
+      "ConnectCompanyDto": {
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "companyId"
+        ]
+      },
+      "CreatePersonCompanyRelationInputDto": {
+        "type": "object",
+        "properties": {
+          "connect": {
+            "$ref": "#/components/schemas/ConnectCompanyDto"
+          }
+        },
+        "required": [
+          "connect"
+        ]
+      },
+      "CreatePersonDto": {
+        "type": "object",
+        "properties": {
+          "personId": {
+            "type": "string"
+          },
+          "avatar": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "job": {
+            "$ref": "#/components/schemas/CreatePersonJobRelationInputDto"
+          },
+          "company": {
+            "$ref": "#/components/schemas/CreatePersonCompanyRelationInputDto"
+          }
+        },
+        "required": [
+          "avatar",
+          "firstName",
+          "lastName",
+          "email",
+          "job",
+          "company"
+        ]
+      },
+      "UpdatePersonJobRelationInputDto": {
+        "type": "object",
+        "properties": {
+          "connect": {
+            "$ref": "#/components/schemas/ConnectJobDto"
+          }
+        },
+        "required": [
+          "connect"
+        ]
+      },
+      "UpdatePersonCompanyRelationInputDto": {
+        "type": "object",
+        "properties": {
+          "connect": {
+            "$ref": "#/components/schemas/ConnectCompanyDto"
+          }
+        },
+        "required": [
+          "connect"
+        ]
+      },
+      "UpdatePersonDto": {
+        "type": "object",
+        "properties": {
+          "avatar": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "job": {
+            "$ref": "#/components/schemas/UpdatePersonJobRelationInputDto"
+          },
+          "company": {
+            "$ref": "#/components/schemas/UpdatePersonCompanyRelationInputDto"
+          }
+        }
+      },
+      "CompanyQueryResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Company"
+            }
+          },
+          "count": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "ConnectPersonDto": {
+        "type": "object",
+        "properties": {
+          "personId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "personId"
+        ]
+      },
+      "CreateCompanyPeopleRelationInputDto": {
+        "type": "object",
+        "properties": {
+          "connect": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConnectPersonDto"
+            }
+          }
+        },
+        "required": [
+          "connect"
+        ]
+      },
+      "CreateCompanyDto": {
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "people": {
+            "$ref": "#/components/schemas/CreateCompanyPeopleRelationInputDto"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "UpdateCompanyPeopleRelationInputDto": {
+        "type": "object",
+        "properties": {
+          "connect": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConnectPersonDto"
+            }
+          }
+        },
+        "required": [
+          "connect"
+        ]
+      },
+      "UpdateCompanyDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "people": {
+            "$ref": "#/components/schemas/UpdateCompanyPeopleRelationInputDto"
+          }
+        }
+      },
+      "JobQueryResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Job"
+            }
+          },
+          "count": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "CreateJobPeopleRelationInputDto": {
+        "type": "object",
+        "properties": {
+          "connect": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConnectPersonDto"
+            }
+          }
+        },
+        "required": [
+          "connect"
+        ]
+      },
+      "CreateJobDto": {
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "people": {
+            "$ref": "#/components/schemas/CreateJobPeopleRelationInputDto"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "UpdateJobPeopleRelationInputDto": {
+        "type": "object",
+        "properties": {
+          "connect": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConnectPersonDto"
+            }
+          }
+        },
+        "required": [
+          "connect"
+        ]
+      },
+      "UpdateJobDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "people": {
+            "$ref": "#/components/schemas/UpdateJobPeopleRelationInputDto"
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "access-token": []
+    }
+  ]
+}

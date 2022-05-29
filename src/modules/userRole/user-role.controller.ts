@@ -19,9 +19,11 @@ import { UserRole } from './entities';
 import { CreateUserRoleDto, UpdateUserRoleDto } from './dto';
 import { QueryObjectTrasform } from 'src/pipes/object.transform';
 import { UserRoleQueryResponseDto } from './dto/response.dto';
+import { Role } from 'src/decorators/role.decorator';
 
 @ApiTags('user-role')
 @Controller('user-role')
+@Role('admin')
 export class UserRoleController {
   constructor(private readonly userRoleService: UserRoleService) {}
 
@@ -62,6 +64,7 @@ export class UserRoleController {
   }
 
   @Delete(':id')
+  @Role('developer')
   @ApiQuery({ name: 'rev', required: false })
   async delete(@Param('id') id: string) {
     const result = await this.userRoleService.delete(id);

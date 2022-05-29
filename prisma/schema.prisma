@@ -7,7 +7,7 @@ generator client  {
 
 generator nestjsDto  {
   provider                        = "prisma-generator-nestjs-dto"
-  output                          = "../src"
+  output                          = "../src/modules"
   outputToNestJsResourceStructure = "true"
   reExport                        = "true"
 }
@@ -104,4 +104,72 @@ model Session {
   updatedAt DateTime @default(now())
   /// @DtoReadOnly
   deletedAt DateTime?
+}
+
+model Job {
+  /// @DtoCreateOptional
+  jobId     String   @db.Uuid @default(uuid()) @id
+  name      String
+
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
+  people    Person[]
+
+  /// @DtoReadOnly
+  isDeleted Boolean  @default(false)
+  /// @DtoReadOnly
+  createdAt DateTime @default(now())
+  /// @DtoReadOnly
+  updatedAt DateTime @default(now())
+  /// @DtoReadOnly
+  deletedAt DateTime?
+}
+
+model Company {
+  /// @DtoCreateOptional
+  companyId String   @db.Uuid @default(uuid()) @id
+  name      String
+
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
+  people    Person[]
+
+  /// @DtoReadOnly
+  isDeleted Boolean  @default(false)
+  /// @DtoReadOnly
+  createdAt DateTime @default(now())
+  /// @DtoReadOnly
+  updatedAt DateTime @default(now())
+  /// @DtoReadOnly
+  deletedAt DateTime?
+}
+
+model Person {
+  /// @DtoCreateOptional
+  personId  String   @db.Uuid @default(uuid()) @id
+  avatar    String
+  firstName String
+  lastName  String
+  email     String
+
+  jobId     String   @db.Uuid
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
+  job       Job      @relation(fields: [jobId], references: [jobId])
+  companyId String   @db.Uuid
+  /// @DtoRelationCanConnectOnCreate
+  /// @DtoRelationCanConnectOnUpdate
+  company   Company  @relation(fields: [companyId], references: [companyId])
+
+  /// @DtoReadOnly
+  isDeleted Boolean  @default(false)
+  /// @DtoReadOnly
+  createdAt DateTime @default(now())
+  /// @DtoReadOnly
+  updatedAt DateTime @default(now())
+  /// @DtoReadOnly
+  deletedAt DateTime?
+
+  @@index([jobId])
+  @@index([companyId])
 }
