@@ -49,7 +49,6 @@ export class JobController {
 
   @Put(':id')
   @Role('admin')
-  @ApiQuery({ name: 'rev', required: false })
   async update(
     @Param('id') id: string,
     @Body() data: UpdateJobDto,
@@ -63,7 +62,6 @@ export class JobController {
 
   @Delete(':id')
   @Role('developer')
-  @ApiQuery({ name: 'rev', required: false })
   async delete(@Param('id') id: string) {
     const result = await this.jobService.delete(id);
     if (typeof result === 'number') {

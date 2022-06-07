@@ -6,6 +6,9 @@ import {
   Role,
   UserRole,
   Session,
+  Person,
+  Company,
+  Job,
 } from '@prisma/client';
 
 type Entity = Partial<{
@@ -17,15 +20,30 @@ type Entity = Partial<{
 
 class EntityMiddlewareOptions<TCreate extends Partial<Entity>> {
   name: Prisma.ModelName;
-  props?: Partial<
+  configure: (entity: EntityMiddlewareOptions<TCreate>) => void;
+  hasOne?: Partial<
     Record<keyof Omit<TCreate, keyof Entity>, EntityMiddlewareOptions<unknown>>
   > = {};
+  hasMany?: Partial<
+    Record<keyof Omit<TCreate, keyof Entity>, EntityMiddlewareOptions<unknown>>
+  > = {};
+
+  constructor(
+    name: Prisma.ModelName,
+    configure: (entity: EntityMiddlewareOptions<TCreate>) => void,
+  ) {
+    this.name = name;
+    this.configure = configure;
+    this.hasOne = {};
+    this.hasMany = {};
+  }
 }
 
-function EntityMiddlewareFactory<T extends Partial<Entity>>({
-  name,
-  props,
-}: EntityMiddlewareOptions<T>): Prisma.Middleware {
+function EntityMiddlewareFactory<T extends Partial<Entity>>(
+  options: EntityMiddlewareOptions<T>,
+): Prisma.Middleware {
+  const { name, hasOne, hasMany, configure } = options;
+  configure(options);
   return function entityMiddleware(params, next) {
     if (params.model !== name) {
       return next(params);
@@ -34,36 +52,60 @@ function EntityMiddlewareFactory<T extends Partial<Entity>>({
 
     function extendQuery({
       args,
-      props,
+      hasOne,
+      hasMany,
+      hasWhere = true,
     }: {
-      args: { select?: TEntity; where?: TEntity };
-      props: Partial<Record<string, EntityMiddlewareOptions<unknown>>>;
+      args: { select?: TEntity; where?: TEntity; include?: TEntity };
+      hasOne: Partial<Record<string, EntityMiddlewareOptions<unknown>>>;
+      hasMany: Partial<Record<string, EntityMiddlewareOptions<unknown>>>;
+      hasWhere?: boolean;
     }) {
-      if (!args.where) {
-        args.where = {} as TEntity;
+      if (hasWhere) {
+        if (!args.where) {
+          args.where = {} as TEntity;
+        }
+        if (typeof args.where === 'string') {
+          args.where = JSON.parse(args.where) as TEntity;
+        }
+        switch (args.where.isDeleted) {
+          case undefined:
+            args.where.isDeleted = false;
+            break;
+          case 'all':
+            args.where.isDeleted = undefined;
+            break;
+        }
       }
-      if (typeof args.where === 'string') {
-        args.where = JSON.parse(args.where) as TEntity;
-      }
-      switch (args.where.isDeleted) {
-        case undefined:
-          args.where.isDeleted = false;
-          break;
-        case 'all':
-          args.where.isDeleted = undefined;
-          break;
-      }
-      if (args.select) {
-        for (const key in props) {
-          if (key in args.select) {
-            if (typeof args.select[key] === 'boolean') {
-              args.select[key] = {};
-            }
-            extendQuery({
-              args: args.select[key],
-              props: props[key].props,
-            });
+      for (const field of ['select', 'include']) {
+        if (!args[field]) {
+          continue;
+        }
+        for (const key in hasMany) {
+          if (!(key in args[field])) {
+            continue;
           }
+          const prop = hasMany[key];
+          if (typeof args[field][key] === 'boolean') {
+            args[field][key] = {};
+          }
+          extendQuery({
+            args: args[field][key],
+            hasOne: prop.hasOne,
+            hasMany: prop.hasMany,
+          });
+        }
+        for (const key in hasOne) {
+          if (!(key in args[field]) || typeof args[field][key] === 'boolean') {
+            continue;
+          }
+          const prop = hasOne[key];
+          extendQuery({
+            args: args[field][key],
+            hasOne: prop.hasOne,
+            hasMany: prop.hasMany,
+            hasWhere: false,
+          });
         }
       }
     }
@@ -84,7 +126,8 @@ function EntityMiddlewareFactory<T extends Partial<Entity>>({
     function queryFilter() {
       extendQuery({
         args: params.args || {},
-        props,
+        hasOne,
+        hasMany,
       });
     }
     function onCreated() {
@@ -134,34 +177,62 @@ function EntityMiddlewareFactory<T extends Partial<Entity>>({
         onDeleted();
         break;
     }
-    console.log(params);
+    // console.log(JSON.stringify(params, null, 2));
     return next(params);
   };
 }
 
-const userOptions: EntityMiddlewareOptions<Prisma.UserCreateInput> = {
-  name: Prisma.ModelName.User,
-  props: {},
-};
+const userOptions = new EntityMiddlewareOptions<Prisma.UserCreateInput>(
+  Prisma.ModelName.User,
+  (entity) => {
+    entity.hasMany.sessions = sessionOptions;
+    entity.hasMany.roles = userRoleOptions;
+  },
+);
 
-const roleOptions: EntityMiddlewareOptions<Prisma.RoleCreateInput> = {
-  name: Prisma.ModelName.Role,
-  props: {},
-};
+const roleOptions = new EntityMiddlewareOptions<Prisma.RoleCreateInput>(
+  Prisma.ModelName.Role,
+  (entity) => {
+    entity.hasMany.users = userRoleOptions;
+  },
+);
 
-const userRoleOptions: EntityMiddlewareOptions<Prisma.UserRoleCreateInput> = {
-  name: Prisma.ModelName.UserRole,
-  props: {},
-};
+const userRoleOptions = new EntityMiddlewareOptions<Prisma.UserRoleCreateInput>(
+  Prisma.ModelName.UserRole,
+  (entity) => {
+    entity.hasOne.user = userOptions;
+    entity.hasOne.role = roleOptions;
+  },
+);
 
-const sessionOptions: EntityMiddlewareOptions<Prisma.SessionCreateInput> = {
-  name: Prisma.ModelName.Session,
-  props: {},
-};
+const sessionOptions = new EntityMiddlewareOptions<Prisma.SessionCreateInput>(
+  Prisma.ModelName.Session,
+  (entity) => {
+    entity.hasOne.user = userOptions;
+  },
+);
 
-sessionOptions.props.user = userOptions;
-userRoleOptions.props.user = userOptions;
-userRoleOptions.props.role = roleOptions;
+const personOptions = new EntityMiddlewareOptions<Prisma.PersonCreateInput>(
+  Prisma.ModelName.Session,
+  (entity) => {
+    entity.hasOne.job = jobOptions;
+    entity.hasOne.company = companyOptions;
+  },
+);
+
+const jobOptions = new EntityMiddlewareOptions<Prisma.JobCreateInput>(
+  Prisma.ModelName.Session,
+  (entity) => {
+    entity.hasMany.people = personOptions;
+  },
+);
+
+const companyOptions = new EntityMiddlewareOptions<Prisma.CompanyCreateInput>(
+  Prisma.ModelName.Session,
+  (entity) => {
+    entity.hasMany.people = personOptions;
+  },
+);
 
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit {
@@ -171,6 +242,9 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
     this.$use(EntityMiddlewareFactory<Role>(roleOptions));
     this.$use(EntityMiddlewareFactory<UserRole>(userRoleOptions));
     this.$use(EntityMiddlewareFactory<Session>(sessionOptions));
+    this.$use(EntityMiddlewareFactory<Person>(personOptions));
+    this.$use(EntityMiddlewareFactory<Job>(jobOptions));
+    this.$use(EntityMiddlewareFactory<Company>(companyOptions));
   }
 
   async enableShutdownHooks(app: INestApplication) {

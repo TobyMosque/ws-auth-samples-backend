@@ -17,6 +17,7 @@ import { CreatePersonDto, UpdatePersonDto } from './dto';
 import { QueryObjectTrasform } from 'src/pipes/object.transform';
 import { PersonQueryResponseDto } from './dto/response.dto';
 import { Role } from 'src/decorators/role.decorator';
+import { Public } from 'src/decorators/public.decorator';
 
 @ApiTags('person')
 @Controller('person')
@@ -49,7 +50,6 @@ export class PersonController {
 
   @Put(':id')
   @Role('admin')
-  @ApiQuery({ name: 'rev', required: false })
   async update(
     @Param('id') id: string,
     @Body() data: UpdatePersonDto,
@@ -63,7 +63,6 @@ export class PersonController {
 
   @Delete(':id')
   @Role('developer')
-  @ApiQuery({ name: 'rev', required: false })
   async delete(@Param('id') id: string) {
     const result = await this.personService.delete(id);
     if (typeof result === 'number') {

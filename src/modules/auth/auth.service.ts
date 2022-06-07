@@ -6,13 +6,20 @@ import { scrypt } from 'crypto';
 import { promisify } from 'util';
 import { v4 as uid } from 'uuid';
 import { PayloadAuthEntity } from './entities/payload-auth.entity';
-import { LoginAuthResponseDto } from './dto/login-auth-response.dto';
+import { LoginAuthResponseEntity } from './entities/login-auth-response.entity';
 
 const scryptAsync = promisify(scrypt);
 const jwtOptions: JwtSignOptions = {
   algorithm: 'HS512',
   audience: process.env.JWT_AUDIENCE,
   issuer: process.env.JWT_AUDIENCE,
+  expiresIn: '15s',
+};
+
+const refreshOptions: JwtSignOptions = {
+  algorithm: 'HS256',
+  audience: '',
+  issuer: '',
   expiresIn: '8h',
 };
 
@@ -78,12 +85,70 @@ export class AuthService {
         },
       },
     });
+
+    const accessToken = this.jwtService.sign(
+      payload,
+      Object.assign(options, jwtOptions),
+    );
+    const refreshToken = this.jwtService.sign(
+      {},
+      Object.assign(options, refreshOptions),
+    );
     return {
-      accessToken: this.jwtService.sign(
+      accessToken,
+      refreshToken,
+    } as LoginAuthResponseEntity;
+  }
+
+  async refresh(token: string) {
+    try {
+      const { jti } = await this.jwtService.verifyAsync<PayloadAuthEntity>(
+        token,
+        refreshOptions,
+      );
+
+      const session = await this.sessionService.find(jti, {
+        select: {
+          user: {
+            select: {
+              userId: true,
+              firstName: true,
+              lastName: true,
+              email: true,
+              roles: {
+                select: {
+                  role: {
+                    select: {
+                      name: true,
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      });
+      console.log(jti, session);
+      if (!session || !session.user) {
+        return '';
+      }
+
+      const user = session.user;
+      const payload: Omit<PayloadAuthEntity, 'jti'> = {
+        sub: user.userId,
+        name: [user.firstName, user.lastName].join(' '),
+        email: user.email,
+        roles: user.roles?.map((r) => r.role?.name) || [],
+      };
+
+      return this.jwtService.sign(
         payload,
-        Object.assign(options, jwtOptions),
-      ),
-    } as LoginAuthResponseDto;
+        Object.assign({ jwtid: jti }, jwtOptions),
+      );
+    } catch (err) {
+      console.log(err);
+      return '';
+    }
   }
 
   async logout(payload: PayloadAuthEntity) {

@@ -10,6 +10,7 @@ import { ExpressAdapter } from '@nestjs/platform-express';
 import { SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './modules/app/app.module';
 import { getOpenApiSpec, writeSwaggerFile } from './openapi';
+import * as cookieParser from 'cookie-parser';
 
 interface RenderParams {
   req: Request;
@@ -53,6 +54,7 @@ export default async function bootstrap({
   render,
 }: ConfigureParams) {
   const app = await NestFactory.create(AppModule, new ExpressAdapter(server));
+  app.use(cookieParser());
   app.setGlobalPrefix(prefix);
   app.useGlobalFilters(new HttpExceptionFilter(prefix, render));
   app.enableCors();

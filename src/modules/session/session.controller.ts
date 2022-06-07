@@ -20,6 +20,7 @@ import { CreateSessionDto, UpdateSessionDto } from './dto';
 import { QueryObjectTrasform } from 'src/pipes/object.transform';
 import { SessionQueryResponseDto } from './dto/response.dto';
 import { Role } from 'src/decorators/role.decorator';
+import { Public } from 'src/decorators/public.decorator';
 
 @ApiTags('session')
 @Controller('session')
@@ -52,7 +53,6 @@ export class SessionController {
   }
 
   @Put(':id')
-  @ApiQuery({ name: 'rev', required: false })
   async update(
     @Param('id') id: string,
     @Body() data: UpdateSessionDto,
@@ -65,7 +65,6 @@ export class SessionController {
   }
 
   @Delete(':id')
-  @ApiQuery({ name: 'rev', required: false })
   async delete(@Param('id') id: string) {
     const result = await this.sessionService.delete(id);
     if (typeof result === 'number') {

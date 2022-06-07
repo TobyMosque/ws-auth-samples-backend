@@ -52,7 +52,6 @@ export class CompanyController {
 
   @Put(':id')
   @Role('admin')
-  @ApiQuery({ name: 'rev', required: false })
   async update(
     @Param('id') id: string,
     @Body() data: UpdateCompanyDto,
@@ -66,7 +65,6 @@ export class CompanyController {
 
   @Delete(':id')
   @Role('developer')
-  @ApiQuery({ name: 'rev', required: false })
   async delete(@Param('id') id: string) {
     const result = await this.companyService.delete(id);
     if (typeof result === 'number') {

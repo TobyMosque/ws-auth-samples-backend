@@ -22,6 +22,7 @@ import { Role } from 'src/decorators/role.decorator';
 @ApiTags('user')
 @Controller('user')
 @Role('admin')
+@Public()
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
@@ -57,7 +58,6 @@ export class UserController {
   }
 
   @Put(':id')
-  @ApiQuery({ name: 'rev', required: false })
   async update(
     @Param('id') id: string,
     @Body() data: UpdateUserDto,
@@ -71,7 +71,6 @@ export class UserController {
 
   @Delete(':id')
   @Role('developer')
-  @ApiQuery({ name: 'rev', required: false })
   async delete(@Param('id') id: string) {
     const result = await this.userService.delete(id);
     if (typeof result === 'number') {

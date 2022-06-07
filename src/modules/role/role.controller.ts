@@ -46,7 +46,6 @@ export class RoleController {
   }
 
   @Put(':id')
-  @ApiQuery({ name: 'rev', required: false })
   async update(
     @Param('id') id: string,
     @Body() data: UpdateRoleDto,
@@ -59,7 +58,6 @@ export class RoleController {
   }
 
   @Delete(':id')
-  @ApiQuery({ name: 'rev', required: false })
   async delete(@Param('id') id: string) {
     const result = await this.roleService.delete(id);
     if (typeof result === 'number') {
