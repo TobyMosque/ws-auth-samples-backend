@@ -86,6 +86,27 @@
         ]
       }
     },
+    "/api/auth/refresh": {
+      "get": {
+        "operationId": "refresh",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "auth"
+        ]
+      }
+    },
     "/api/auth/logout": {
       "delete": {
         "operationId": "logout",
@@ -151,12 +172,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "rev",
-            "required": false,
-            "in": "query",
-            "schema": {}
           }
         ],
         "requestBody": {
@@ -195,12 +210,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "rev",
-            "required": false,
-            "in": "query",
-            "schema": {}
           }
         ],
         "responses": {
@@ -376,12 +385,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "rev",
-            "required": false,
-            "in": "query",
-            "schema": {}
           }
         ],
         "requestBody": {
@@ -420,12 +423,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "rev",
-            "required": false,
-            "in": "query",
-            "schema": {}
           }
         ],
         "responses": {
@@ -601,12 +598,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "rev",
-            "required": false,
-            "in": "query",
-            "schema": {}
           }
         ],
         "requestBody": {
@@ -645,12 +636,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "rev",
-            "required": false,
-            "in": "query",
-            "schema": {}
           }
         ],
         "responses": {
@@ -826,12 +811,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "rev",
-            "required": false,
-            "in": "query",
-            "schema": {}
           }
         ],
         "requestBody": {
@@ -870,12 +849,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "rev",
-            "required": false,
-            "in": "query",
-            "schema": {}
           }
         ],
         "responses": {
@@ -1051,12 +1024,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "rev",
-            "required": false,
-            "in": "query",
-            "schema": {}
           }
         ],
         "requestBody": {
@@ -1095,12 +1062,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "rev",
-            "required": false,
-            "in": "query",
-            "schema": {}
           }
         ],
         "responses": {
@@ -1276,12 +1237,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "rev",
-            "required": false,
-            "in": "query",
-            "schema": {}
           }
         ],
         "requestBody": {
@@ -1320,12 +1275,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "rev",
-            "required": false,
-            "in": "query",
-            "schema": {}
           }
         ],
         "responses": {
@@ -1501,12 +1450,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "rev",
-            "required": false,
-            "in": "query",
-            "schema": {}
           }
         ],
         "requestBody": {
@@ -1545,12 +1488,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "rev",
-            "required": false,
-            "in": "query",
-            "schema": {}
           }
         ],
         "responses": {

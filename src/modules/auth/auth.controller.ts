@@ -16,7 +16,15 @@ import { AuthService } from './auth.service';
 import { Public } from 'src/decorators/public.decorator';
 import { RequestAuthDto } from './dto/request-auth.dto';
 import { LoginAuthResponseDto } from './dto/login-auth-response.dto';
-import { Response, Request } from 'express';
+import { Response, Request, CookieOptions } from 'express';
+
+const refreshName = 'REFRESH_TOKEN';
+const refreshOptions: CookieOptions = {
+  httpOnly: true,
+  secure: true,
+  sameSite: 'strict',
+  path: '/',
+};
 
 @ApiTags('auth')
 @Controller('auth')
@@ -34,13 +42,8 @@ export class AuthController {
     const res = await this.authService.login(req.user);
     const expires = new Date();
     expires.setHours(expires.getHours() + 8);
-    response.cookie('REFRESH_TOKEN', res.refreshToken, {
-      httpOnly: true,
-      secure: true,
-      sameSite: 'strict',
-      path: '/',
-      expires,
-    });
+    const options = Object.assign({ expires }, refreshOptions);
+    response.cookie(refreshName, res.refreshToken, options);
     return {
       accessToken: res.accessToken,
     };
@@ -61,7 +64,11 @@ export class AuthController {
   }
 
   @Delete('logout')
-  async logout(@Req() req: RequestAuthDto) {
-    return this.authService.logout(req.user);
+  async logout(
+    @Req() res: RequestAuthDto,
+    @Res({ passthrough: true }) response: Response,
+  ) {
+    response.clearCookie(refreshName, refreshOptions);
+    return this.authService.logout(res.user);
   }
 }
