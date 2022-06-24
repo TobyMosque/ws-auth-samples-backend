@@ -8,7 +8,6 @@ export class QueryObjectTrasform implements PipeTransform {
    * @param metadata contains metadata about the value
    */
   transform(value: Record<string, unknown>, meta) {
-    console.log(value, meta);
     for (const key in value) {
       const cur = value[key];
       if (cur && typeof cur === 'string') {

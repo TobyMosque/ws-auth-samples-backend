@@ -134,7 +134,6 @@ function EntityMiddlewareFactory<T extends Partial<Entity>>({
         onDeleted();
         break;
     }
-    console.log(params);
     return next(params);
   };
 }
