@@ -1,5 +1,5 @@
-import { UserRole } from 'src/modules/userRole/entities/userRole.entity';
-import { Session } from 'src/modules/session/entities/session.entity';
+import { UserRole } from '../../userRole/entities/userRole.entity';
+import { Session } from '../../session/entities/session.entity';
 
 export class User {
   userId: string;

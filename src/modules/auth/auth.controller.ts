@@ -21,8 +21,8 @@ import { Response, Request, CookieOptions } from 'express';
 const refreshName = 'REFRESH_TOKEN';
 const refreshOptions: CookieOptions = {
   httpOnly: true,
-  secure: true,
-  sameSite: 'strict',
+  secure: process.env.COOKIE_SECURE === 'true',
+  sameSite: 'lax',
   path: '/',
 };
 

@@ -57,7 +57,17 @@ export default async function bootstrap({
   app.use(cookieParser());
   app.setGlobalPrefix(prefix);
   app.useGlobalFilters(new HttpExceptionFilter(prefix, render));
-  app.enableCors();
+  app.enableCors({
+    origin(origin, callback) {
+      const origins = process.env.CORS_ALLOWED_ORIGIN?.split(',') || [];
+      if (!origin || origins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true,
+  });
 
   const document = await getOpenApiSpec({ app });
   SwaggerModule.setup(`${prefix}/swagger`, app, document);

@@ -1,4 +1,4 @@
-import { UserRole } from 'src/modules/userRole/entities/userRole.entity';
+import { UserRole } from '../../userRole/entities/userRole.entity';
 
 export class Role {
   roleId: string;

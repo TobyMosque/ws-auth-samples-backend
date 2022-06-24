@@ -128,7 +128,6 @@ export class AuthService {
           },
         },
       });
-      console.log(jti, session);
       if (!session || !session.user) {
         return '';
       }
@@ -146,7 +145,6 @@ export class AuthService {
         Object.assign({ jwtid: jti }, jwtOptions),
       );
     } catch (err) {
-      console.log(err);
       return '';
     }
   }

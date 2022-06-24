@@ -177,7 +177,6 @@ function EntityMiddlewareFactory<T extends Partial<Entity>>(
         onDeleted();
         break;
     }
-    // console.log(JSON.stringify(params, null, 2));
     return next(params);
   };
 }

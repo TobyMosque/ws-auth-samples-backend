@@ -1,7 +1,7 @@
+import { config } from 'src/config';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from 'src/modules/auth/auth.module';
 import { UserModule } from 'src/modules/user/user.module';
 import { RoleModule } from 'src/modules/role/role.module';
@@ -22,7 +22,7 @@ import { JwtStrategy } from 'src/strategies/jwt.strategy';
     PersonModule,
     CompanyModule,
     JobModule,
-    ConfigModule.forRoot(),
+    config,
   ],
   controllers: [AppController],
   providers: [AppService, JwtStrategy],
