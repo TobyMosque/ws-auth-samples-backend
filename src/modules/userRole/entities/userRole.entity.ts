@@ -1,5 +1,5 @@
-import { User } from 'src/modules/user/entities/user.entity';
-import { Role } from 'src/modules/role/entities/role.entity';
+import { User } from '../../user/entities/user.entity';
+import { Role } from '../../role/entities/role.entity';
 
 export class UserRole {
   userRoleId: string;

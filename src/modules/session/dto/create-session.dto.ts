@@ -1,5 +1,5 @@
 import { ApiExtraModels } from '@nestjs/swagger';
-import { ConnectUserDto } from 'src/modules/user/dto/connect-user.dto';
+import { ConnectUserDto } from '../../user/dto/connect-user.dto';
 
 export class CreateSessionUserRelationInputDto {
   connect: ConnectUserDto;

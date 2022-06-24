@@ -1,6 +1,6 @@
 import { ApiExtraModels } from '@nestjs/swagger';
-import { ConnectUserRoleDto } from 'src/modules/userRole/dto/connect-userRole.dto';
-import { ConnectSessionDto } from 'src/modules/session/dto/connect-session.dto';
+import { ConnectUserRoleDto } from '../../userRole/dto/connect-userRole.dto';
+import { ConnectSessionDto } from '../../session/dto/connect-session.dto';
 
 export class UpdateUserRolesRelationInputDto {
   connect: ConnectUserRoleDto[];
