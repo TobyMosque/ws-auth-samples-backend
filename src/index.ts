@@ -10,6 +10,7 @@ import { ExpressAdapter } from '@nestjs/platform-express';
 import { SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './modules/app/app.module';
 import { getOpenApiSpec, writeSwaggerFile } from './openapi';
+import * as cookieParser from 'cookie-parser';
 
 interface RenderParams {
   req: Request;
@@ -47,15 +48,31 @@ export class HttpExceptionFilter implements ExceptionFilter {
   }
 }
 
+let _preffix = '';
+export function getPreffix() {
+  return _preffix;
+}
+export function setPreffix(preffix: string) {
+  _preffix = preffix;
+}
 export default async function bootstrap({
   app: server,
   prefix,
   render,
 }: ConfigureParams) {
   const app = await NestFactory.create(AppModule, new ExpressAdapter(server));
-  app.setGlobalPrefix(prefix);
+  setPreffix(prefix);
+  app.setGlobalPrefix(getPreffix());
   app.useGlobalFilters(new HttpExceptionFilter(prefix, render));
-  app.enableCors();
+  app.enableCors({
+    origin: 'http://localhost:9103',
+    credentials: true,
+  });
+  app.use(
+    cookieParser({
+      secret: process.env.JWT_SECRET,
+    }),
+  );
 
   const document = await getOpenApiSpec({ app });
   SwaggerModule.setup(`${prefix}/swagger`, app, document);

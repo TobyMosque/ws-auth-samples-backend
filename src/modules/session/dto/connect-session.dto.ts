@@ -1,3 +1,5 @@
-export class ConnectSessionDto {
-  sessionId: string;
-}
+
+  export class ConnectSessionDto {
+    sessionId: string;
+  }
+  

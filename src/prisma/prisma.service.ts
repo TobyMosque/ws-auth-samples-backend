@@ -15,10 +15,17 @@ type Entity = Partial<{
   deletedAt: Date | string | null;
 }>;
 
+enum NavigationType {
+  single = 'single',
+  many = 'many',
+}
 class EntityMiddlewareOptions<TCreate extends Partial<Entity>> {
   name: Prisma.ModelName;
   props?: Partial<
-    Record<keyof Omit<TCreate, keyof Entity>, EntityMiddlewareOptions<unknown>>
+    Record<
+      keyof Omit<TCreate, keyof Entity>,
+      { prop: EntityMiddlewareOptions<unknown>; type: NavigationType }
+    >
   > = {};
 }
 
@@ -34,24 +41,33 @@ function EntityMiddlewareFactory<T extends Partial<Entity>>({
 
     function extendQuery({
       args,
+      type,
       props,
     }: {
       args: { select?: TEntity; where?: TEntity };
-      props: Partial<Record<string, EntityMiddlewareOptions<unknown>>>;
+      type?: NavigationType;
+      props: Partial<
+        Record<
+          string,
+          { prop: EntityMiddlewareOptions<unknown>; type: NavigationType }
+        >
+      >;
     }) {
-      if (!args.where) {
-        args.where = {} as TEntity;
-      }
-      if (typeof args.where === 'string') {
-        args.where = JSON.parse(args.where) as TEntity;
-      }
-      switch (args.where.isDeleted) {
-        case undefined:
-          args.where.isDeleted = false;
-          break;
-        case 'all':
-          args.where.isDeleted = undefined;
-          break;
+      if (type !== NavigationType.single) {
+        if (!args.where) {
+          args.where = {} as TEntity;
+        }
+        if (typeof args.where === 'string') {
+          args.where = JSON.parse(args.where) as TEntity;
+        }
+        switch (args.where.isDeleted) {
+          case undefined:
+            args.where.isDeleted = false;
+            break;
+          case 'all':
+            args.where.isDeleted = undefined;
+            break;
+        }
       }
       if (args.select) {
         for (const key in props) {
@@ -61,7 +77,8 @@ function EntityMiddlewareFactory<T extends Partial<Entity>>({
             }
             extendQuery({
               args: args.select[key],
-              props: props[key].props,
+              type: props[key].type,
+              props: props[key].prop.props,
             });
           }
         }
@@ -158,9 +175,9 @@ const sessionOptions: EntityMiddlewareOptions<Prisma.SessionCreateInput> = {
   props: {},
 };
 
-sessionOptions.props.user = userOptions;
-userRoleOptions.props.user = userOptions;
-userRoleOptions.props.role = roleOptions;
+sessionOptions.props.user = { prop: userOptions, type: NavigationType.single };
+userRoleOptions.props.user = { prop: userOptions, type: NavigationType.single };
+userRoleOptions.props.role = { prop: roleOptions, type: NavigationType.single };
 
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit {

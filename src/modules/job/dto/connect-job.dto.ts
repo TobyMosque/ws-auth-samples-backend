@@ -1,3 +1,5 @@
-export class ConnectJobDto {
-  jobId: string;
-}
+
+  export class ConnectJobDto {
+    jobId: string;
+  }
+  

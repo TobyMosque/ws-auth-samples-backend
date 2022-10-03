@@ -7,13 +7,21 @@ import { promisify } from 'util';
 import { v4 as uid } from 'uuid';
 import { PayloadAuthEntity } from './entities/payload-auth.entity';
 import { LoginAuthResponseDto } from './dto/login-auth-response.dto';
+import { RefreshAuthResponseDto } from './dto/refresh-auth-response.dto';
 
 const scryptAsync = promisify(scrypt);
 const jwtOptions: JwtSignOptions = {
   algorithm: 'HS512',
   audience: process.env.JWT_AUDIENCE,
   issuer: process.env.JWT_AUDIENCE,
-  expiresIn: '8h',
+  expiresIn: '30s',
+};
+
+const refreshOptions: JwtSignOptions = {
+  algorithm: 'HS256',
+  audience: process.env.JWT_AUDIENCE,
+  issuer: process.env.JWT_AUDIENCE,
+  expiresIn: '24h',
 };
 
 @Injectable()
@@ -78,12 +86,72 @@ export class AuthService {
         },
       },
     });
-    return {
-      accessToken: this.jwtService.sign(
-        payload,
-        Object.assign(options, jwtOptions),
-      ),
-    } as LoginAuthResponseDto;
+
+    const accessToken = this.jwtService.sign(
+      payload,
+      Object.assign(options, jwtOptions),
+    );
+    const refreshToken = this.jwtService.sign(
+      {},
+      Object.assign(options, refreshOptions),
+    );
+    const response: LoginAuthResponseDto = { accessToken, refreshToken };
+    return response;
+  }
+
+  async refresh(refreshToken: string) {
+    const res: RefreshAuthResponseDto = { accessToken: '' };
+    if (!refreshToken) {
+      return res;
+    }
+    if (!this.jwtService.verifyAsync(refreshToken, refreshOptions)) {
+      return res;
+    }
+    const payload = this.jwtService.decode(refreshToken);
+    if (typeof payload === 'string' || !('jti' in payload)) {
+      return res;
+    }
+    const session = await this.sessionService.find(payload.jti, {
+      select: {
+        sessionId: true,
+        userId: true,
+        user: {
+          select: {
+            firstName: true,
+            lastName: true,
+            email: true,
+            roles: {
+              select: {
+                role: {
+                  select: {
+                    name: true,
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    });
+    if (!session?.sessionId) {
+      return res;
+    }
+    const user: PayloadAuthEntity = {
+      jti: session.sessionId,
+      sub: session.userId,
+      name: [session.user?.firstName, session.user?.lastName].join(' '),
+      email: session.user?.email,
+      roles: session.user?.roles?.map((r) => r.role?.name) || [],
+    };
+    const { jti, ..._user } = user;
+    const options: JwtSignOptions = {
+      jwtid: jti,
+    };
+    res.accessToken = this.jwtService.sign(
+      _user,
+      Object.assign(options, jwtOptions),
+    );
+    return res;
   }
 
   async logout(payload: PayloadAuthEntity) {
