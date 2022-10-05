@@ -104,7 +104,13 @@ export class AuthService {
     if (!refreshToken) {
       return res;
     }
-    if (!this.jwtService.verifyAsync(refreshToken, refreshOptions)) {
+    let isValid: any = false;
+    try {
+      isValid = await this.jwtService.verifyAsync(refreshToken, refreshOptions);
+    } catch (err) {
+      isValid = false;
+    }
+    if (!isValid) {
       return res;
     }
     const payload = this.jwtService.decode(refreshToken);

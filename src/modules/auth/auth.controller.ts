@@ -21,11 +21,14 @@ import { CookieOptions, Request, Response } from 'express';
 import { getPreffix } from 'src/index';
 
 function cookieOptions(): CookieOptions {
+  const expires = new Date();
+  expires.setDate(expires.getDate() + 1);
   return {
     path: [getPreffix(), 'auth', 'refresh'].join('/'),
     // secure: true,
     sameSite: 'lax',
     httpOnly: true,
+    expires: expires,
   };
 }
 
