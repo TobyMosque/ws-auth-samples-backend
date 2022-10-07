@@ -91,6 +91,7 @@ model UserRole {
 model Session {
   /// @DtoCreateOptional
   sessionId String @db.Uuid @default(uuid()) @id
+  refresh   String @db.Uuid?
 
   userId    String @db.Uuid
   /// @DtoRelationCanConnectOnCreate

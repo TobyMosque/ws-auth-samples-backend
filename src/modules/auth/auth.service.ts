@@ -7,7 +7,7 @@ import { promisify } from 'util';
 import { v4 as uid } from 'uuid';
 import { PayloadAuthEntity } from './entities/payload-auth.entity';
 import { LoginAuthResponseDto } from './dto/login-auth-response.dto';
-import { RefreshAuthResponseDto } from './dto/refresh-auth-response.dto';
+import { comb } from 'src/utils';
 
 const scryptAsync = promisify(scrypt);
 const jwtOptions: JwtSignOptions = {
@@ -78,8 +78,10 @@ export class AuthService {
     const options: JwtSignOptions = {
       jwtid: jti,
     };
+    const refresh = comb();
     await this.sessionService.create({
       sessionId: jti,
+      refresh,
       user: {
         connect: {
           userId: user.sub,
@@ -92,7 +94,7 @@ export class AuthService {
       Object.assign(options, jwtOptions),
     );
     const refreshToken = this.jwtService.sign(
-      {},
+      { refresh },
       Object.assign(options, refreshOptions),
     );
     const response: LoginAuthResponseDto = { accessToken, refreshToken };
@@ -100,7 +102,7 @@ export class AuthService {
   }
 
   async refresh(refreshToken: string) {
-    const res: RefreshAuthResponseDto = { accessToken: '' };
+    const res: LoginAuthResponseDto = { accessToken: '' };
     if (!refreshToken) {
       return res;
     }
@@ -120,6 +122,7 @@ export class AuthService {
     const session = await this.sessionService.find(payload.jti, {
       select: {
         sessionId: true,
+        refresh: true,
         userId: true,
         user: {
           select: {
@@ -139,7 +142,12 @@ export class AuthService {
         },
       },
     });
+
     if (!session?.sessionId) {
+      return res;
+    }
+    if (session?.refresh !== payload?.refresh) {
+      await this.sessionService.delete(session.sessionId);
       return res;
     }
     const user: PayloadAuthEntity = {
@@ -153,9 +161,17 @@ export class AuthService {
     const options: JwtSignOptions = {
       jwtid: jti,
     };
+
+    const refresh = comb();
+    await this.sessionService.update(session.sessionId, { refresh });
+
     res.accessToken = this.jwtService.sign(
       _user,
       Object.assign(options, jwtOptions),
+    );
+    res.refreshToken = this.jwtService.sign(
+      { refresh },
+      Object.assign(options, refreshOptions),
     );
     return res;
   }

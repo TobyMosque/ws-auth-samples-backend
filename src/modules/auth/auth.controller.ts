@@ -16,7 +16,6 @@ import { Public } from 'src/decorators/public.decorator';
 import { RequestAuthDto } from './dto/request-auth.dto';
 import { LoginAuthResponseDto } from './dto/login-auth-response.dto';
 import { FlowType } from './enums';
-import { RefreshAuthResponseDto } from './dto/refresh-auth-response.dto';
 import { CookieOptions, Request, Response } from 'express';
 import { getPreffix } from 'src/index';
 
@@ -30,6 +29,22 @@ function cookieOptions(): CookieOptions {
     httpOnly: true,
     expires: expires,
   };
+}
+
+function checkRefresh({
+  flow,
+  tokens,
+  response,
+}: {
+  flow: FlowType;
+  tokens: LoginAuthResponseDto;
+  response: Response;
+}) {
+  if (flow == FlowType.server) {
+    const { refreshToken } = tokens;
+    delete tokens.refreshToken;
+    response.cookie('REFRESH_TOKEN', refreshToken, cookieOptions());
+  }
 }
 
 @ApiTags('auth')
@@ -48,11 +63,7 @@ export class AuthController {
     @Res({ passthrough: true }) response: Response,
   ): Promise<LoginAuthResponseDto> {
     const tokens = await this.authService.login(req.user);
-    if (qs.flow == FlowType.server) {
-      const { refreshToken } = tokens;
-      delete tokens.refreshToken;
-      response.cookie('REFRESH_TOKEN', refreshToken, cookieOptions());
-    }
+    checkRefresh({ flow: qs.flow, tokens, response });
     return tokens;
   }
 
@@ -63,7 +74,8 @@ export class AuthController {
   async refresh(
     @Req() request: Request,
     @Query() qs: { flow: FlowType },
-  ): Promise<RefreshAuthResponseDto> {
+    @Res({ passthrough: true }) response: Response,
+  ): Promise<LoginAuthResponseDto> {
     let refreshToken = '';
     switch (qs.flow) {
       case FlowType.client:
@@ -73,7 +85,9 @@ export class AuthController {
         refreshToken = request.cookies['REFRESH_TOKEN'];
         break;
     }
-    return await this.authService.refresh(refreshToken);
+    const tokens = await this.authService.refresh(refreshToken);
+    checkRefresh({ flow: qs.flow, tokens, response });
+    return tokens;
   }
 
   @Delete('logout')

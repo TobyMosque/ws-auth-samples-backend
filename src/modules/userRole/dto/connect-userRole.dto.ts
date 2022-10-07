@@ -1,5 +1,3 @@
-
-  export class ConnectUserRoleDto {
-    userRoleId: string;
-  }
-  
+export class ConnectUserRoleDto {
+  userRoleId: string;
+}
