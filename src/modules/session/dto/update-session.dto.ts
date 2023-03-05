@@ -8,5 +8,6 @@ export class UpdateSessionUserRelationInputDto {
 
 @ApiExtraModels(ConnectUserDto,UpdateSessionUserRelationInputDto)
 export class UpdateSessionDto {
+  refreshId?: string;
   user?: UpdateSessionUserRelationInputDto;
 }
