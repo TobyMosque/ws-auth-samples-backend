@@ -121,10 +121,7 @@ export class AuthService {
     }
 
     const rotation = !!payload.refresh;
-    const sessions = await this.sessionService.query({
-      where: rotation
-        ? { refreshId: payload.refresh }
-        : { sessionId: payload.jti },
+    const session = await this.sessionService.find(payload.jti, {
       select: {
         sessionId: true,
         userId: true,
@@ -146,11 +143,14 @@ export class AuthService {
         },
       },
     });
-    if (!sessions?.data?.[0]?.sessionId) {
+    if (!session?.sessionId) {
       return res;
     }
 
-    const session = sessions.data[0];
+    if (rotation && session.refreshId !== payload.refresh) {
+      return res;
+    }
+
     const user: PayloadAuthEntity = {
       jti: session.sessionId,
       sub: session.userId,
