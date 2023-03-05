@@ -73,13 +73,15 @@ export class AuthService {
     return null;
   }
 
-  async login(user: PayloadAuthEntity) {
+  async login(user: PayloadAuthEntity, rotation: boolean) {
     const { jti, ...payload } = user;
     const options: JwtSignOptions = {
       jwtid: jti,
     };
+    const refresh = uid();
     await this.sessionService.create({
       sessionId: jti,
+      refreshId: rotation ? refresh : null,
       user: {
         connect: {
           userId: user.sub,
@@ -92,7 +94,7 @@ export class AuthService {
       Object.assign(options, jwtOptions),
     );
     const refreshToken = this.jwtService.sign(
-      {},
+      rotation ? { refresh } : {},
       Object.assign(options, refreshOptions),
     );
     const response: LoginAuthResponseDto = { accessToken, refreshToken };
@@ -117,7 +119,12 @@ export class AuthService {
     if (typeof payload === 'string' || !('jti' in payload)) {
       return res;
     }
-    const session = await this.sessionService.find(payload.jti, {
+
+    const rotation = !!payload.refresh;
+    const sessions = await this.sessionService.query({
+      where: rotation
+        ? { refreshId: payload.refresh }
+        : { sessionId: payload.jti },
       select: {
         sessionId: true,
         userId: true,
@@ -139,9 +146,11 @@ export class AuthService {
         },
       },
     });
-    if (!session?.sessionId) {
+    if (!sessions?.data?.[0]?.sessionId) {
       return res;
     }
+
+    const session = sessions.data[0];
     const user: PayloadAuthEntity = {
       jti: session.sessionId,
       sub: session.userId,
@@ -157,6 +166,22 @@ export class AuthService {
       _user,
       Object.assign(options, jwtOptions),
     );
+
+    if (rotation) {
+      res.accessToken = this.jwtService.sign(
+        _user,
+        Object.assign(options, jwtOptions),
+      );
+      const refresh = uid();
+      await this.sessionService.update(session.sessionId, {
+        refreshId: refresh,
+      });
+
+      res.refreshToken = this.jwtService.sign(
+        { refresh },
+        Object.assign(options, refreshOptions),
+      );
+    }
     return res;
   }
 

@@ -44,10 +44,10 @@ export class AuthController {
   @ApiQuery({ name: 'flow', enum: FlowType })
   async login(
     @Req() req: RequestAuthDto,
-    @Query() qs: { flow: FlowType },
+    @Query() qs: { flow: FlowType; rotation: boolean },
     @Res({ passthrough: true }) response: Response,
   ): Promise<LoginAuthResponseDto> {
-    const tokens = await this.authService.login(req.user);
+    const tokens = await this.authService.login(req.user, qs.rotation);
     if (qs.flow == FlowType.server) {
       const { refreshToken } = tokens;
       delete tokens.refreshToken;
@@ -63,6 +63,7 @@ export class AuthController {
   async refresh(
     @Req() request: Request,
     @Query() qs: { flow: FlowType },
+    @Res({ passthrough: true }) response: Response,
   ): Promise<RefreshAuthResponseDto> {
     let refreshToken = '';
     switch (qs.flow) {
@@ -73,7 +74,13 @@ export class AuthController {
         refreshToken = request.cookies['REFRESH_TOKEN'];
         break;
     }
-    return await this.authService.refresh(refreshToken);
+    const tokens = await this.authService.refresh(refreshToken);
+    if (qs.flow == FlowType.server && tokens.refreshToken) {
+      const { refreshToken } = tokens;
+      delete tokens.refreshToken;
+      response.cookie('REFRESH_TOKEN', refreshToken, cookieOptions());
+    }
+    return tokens;
   }
 
   @Delete('logout')
