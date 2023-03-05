@@ -60,6 +60,14 @@
         "operationId": "login",
         "parameters": [
           {
+            "name": "rotation",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
             "name": "flow",
             "required": true,
             "in": "query",
