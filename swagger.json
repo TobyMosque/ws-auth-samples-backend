@@ -64,10 +64,7 @@
             "required": true,
             "in": "query",
             "schema": {
-              "enum": [
-                "server",
-                "client"
-              ],
+              "enum": ["server", "client"],
               "type": "string"
             }
           }
@@ -94,9 +91,7 @@
             }
           }
         },
-        "tags": [
-          "auth"
-        ]
+        "tags": ["auth"]
       }
     },
     "/api/auth/refresh": {
@@ -115,10 +110,7 @@
             "required": true,
             "in": "query",
             "schema": {
-              "enum": [
-                "server",
-                "client"
-              ],
+              "enum": ["server", "client"],
               "type": "string"
             }
           }
@@ -135,9 +127,7 @@
             }
           }
         },
-        "tags": [
-          "auth"
-        ]
+        "tags": ["auth"]
       }
     },
     "/api/auth/logout": {
@@ -149,10 +139,7 @@
             "required": true,
             "in": "query",
             "schema": {
-              "enum": [
-                "server",
-                "client"
-              ],
+              "enum": ["server", "client"],
               "type": "string"
             }
           }
@@ -162,9 +149,7 @@
             "description": ""
           }
         },
-        "tags": [
-          "auth"
-        ]
+        "tags": ["auth"]
       }
     },
     "/api/user/{id}": {
@@ -204,9 +189,7 @@
             }
           }
         },
-        "tags": [
-          "user"
-        ]
+        "tags": ["user"]
       },
       "put": {
         "operationId": "update",
@@ -248,9 +231,7 @@
             }
           }
         },
-        "tags": [
-          "user"
-        ]
+        "tags": ["user"]
       },
       "delete": {
         "operationId": "delete",
@@ -282,9 +263,7 @@
             }
           }
         },
-        "tags": [
-          "user"
-        ]
+        "tags": ["user"]
       }
     },
     "/api/user": {
@@ -358,9 +337,7 @@
             }
           }
         },
-        "tags": [
-          "user"
-        ]
+        "tags": ["user"]
       },
       "put": {
         "operationId": "create",
@@ -387,9 +364,7 @@
             }
           }
         },
-        "tags": [
-          "user"
-        ]
+        "tags": ["user"]
       }
     },
     "/api/session/{id}": {
@@ -429,9 +404,7 @@
             }
           }
         },
-        "tags": [
-          "session"
-        ]
+        "tags": ["session"]
       },
       "put": {
         "operationId": "update",
@@ -473,9 +446,7 @@
             }
           }
         },
-        "tags": [
-          "session"
-        ]
+        "tags": ["session"]
       },
       "delete": {
         "operationId": "delete",
@@ -507,9 +478,7 @@
             }
           }
         },
-        "tags": [
-          "session"
-        ]
+        "tags": ["session"]
       }
     },
     "/api/session": {
@@ -583,9 +552,7 @@
             }
           }
         },
-        "tags": [
-          "session"
-        ]
+        "tags": ["session"]
       },
       "put": {
         "operationId": "create",
@@ -612,9 +579,7 @@
             }
           }
         },
-        "tags": [
-          "session"
-        ]
+        "tags": ["session"]
       }
     },
     "/api/role/{id}": {
@@ -654,9 +619,7 @@
             }
           }
         },
-        "tags": [
-          "role"
-        ]
+        "tags": ["role"]
       },
       "put": {
         "operationId": "update",
@@ -698,9 +661,7 @@
             }
           }
         },
-        "tags": [
-          "role"
-        ]
+        "tags": ["role"]
       },
       "delete": {
         "operationId": "delete",
@@ -732,9 +693,7 @@
             }
           }
         },
-        "tags": [
-          "role"
-        ]
+        "tags": ["role"]
       }
     },
     "/api/role": {
@@ -808,9 +767,7 @@
             }
           }
         },
-        "tags": [
-          "role"
-        ]
+        "tags": ["role"]
       },
       "put": {
         "operationId": "create",
@@ -837,9 +794,7 @@
             }
           }
         },
-        "tags": [
-          "role"
-        ]
+        "tags": ["role"]
       }
     },
     "/api/user-role/{id}": {
@@ -879,9 +834,7 @@
             }
           }
         },
-        "tags": [
-          "user-role"
-        ]
+        "tags": ["user-role"]
       },
       "put": {
         "operationId": "update",
@@ -923,9 +876,7 @@
             }
           }
         },
-        "tags": [
-          "user-role"
-        ]
+        "tags": ["user-role"]
       },
       "delete": {
         "operationId": "delete",
@@ -957,9 +908,7 @@
             }
           }
         },
-        "tags": [
-          "user-role"
-        ]
+        "tags": ["user-role"]
       }
     },
     "/api/user-role": {
@@ -1033,9 +982,7 @@
             }
           }
         },
-        "tags": [
-          "user-role"
-        ]
+        "tags": ["user-role"]
       },
       "put": {
         "operationId": "create",
@@ -1062,9 +1009,7 @@
             }
           }
         },
-        "tags": [
-          "user-role"
-        ]
+        "tags": ["user-role"]
       }
     },
     "/api/person/{id}": {
@@ -1104,9 +1049,7 @@
             }
           }
         },
-        "tags": [
-          "person"
-        ]
+        "tags": ["person"]
       },
       "put": {
         "operationId": "update",
@@ -1148,9 +1091,7 @@
             }
           }
         },
-        "tags": [
-          "person"
-        ]
+        "tags": ["person"]
       },
       "delete": {
         "operationId": "delete",
@@ -1182,9 +1123,7 @@
             }
           }
         },
-        "tags": [
-          "person"
-        ]
+        "tags": ["person"]
       }
     },
     "/api/person": {
@@ -1258,9 +1197,7 @@
             }
           }
         },
-        "tags": [
-          "person"
-        ]
+        "tags": ["person"]
       },
       "put": {
         "operationId": "create",
@@ -1287,9 +1224,7 @@
             }
           }
         },
-        "tags": [
-          "person"
-        ]
+        "tags": ["person"]
       }
     },
     "/api/company/{id}": {
@@ -1329,9 +1264,7 @@
             }
           }
         },
-        "tags": [
-          "company"
-        ]
+        "tags": ["company"]
       },
       "put": {
         "operationId": "update",
@@ -1373,9 +1306,7 @@
             }
           }
         },
-        "tags": [
-          "company"
-        ]
+        "tags": ["company"]
       },
       "delete": {
         "operationId": "delete",
@@ -1407,9 +1338,7 @@
             }
           }
         },
-        "tags": [
-          "company"
-        ]
+        "tags": ["company"]
       }
     },
     "/api/company": {
@@ -1483,9 +1412,7 @@
             }
           }
         },
-        "tags": [
-          "company"
-        ]
+        "tags": ["company"]
       },
       "put": {
         "operationId": "create",
@@ -1512,9 +1439,7 @@
             }
           }
         },
-        "tags": [
-          "company"
-        ]
+        "tags": ["company"]
       }
     },
     "/api/job/{id}": {
@@ -1554,9 +1479,7 @@
             }
           }
         },
-        "tags": [
-          "job"
-        ]
+        "tags": ["job"]
       },
       "put": {
         "operationId": "update",
@@ -1598,9 +1521,7 @@
             }
           }
         },
-        "tags": [
-          "job"
-        ]
+        "tags": ["job"]
       },
       "delete": {
         "operationId": "delete",
@@ -1632,9 +1553,7 @@
             }
           }
         },
-        "tags": [
-          "job"
-        ]
+        "tags": ["job"]
       }
     },
     "/api/job": {
@@ -1708,9 +1627,7 @@
             }
           }
         },
-        "tags": [
-          "job"
-        ]
+        "tags": ["job"]
       },
       "put": {
         "operationId": "create",
@@ -1737,9 +1654,7 @@
             }
           }
         },
-        "tags": [
-          "job"
-        ]
+        "tags": ["job"]
       }
     }
   },
@@ -1782,13 +1697,7 @@
             }
           }
         },
-        "required": [
-          "jti",
-          "sub",
-          "name",
-          "email",
-          "roles"
-        ]
+        "required": ["jti", "sub", "name", "email", "roles"]
       },
       "LoginAuthDto": {
         "type": "object",
@@ -1800,10 +1709,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "username",
-          "password"
-        ]
+        "required": ["username", "password"]
       },
       "LoginAuthResponseDto": {
         "type": "object",
@@ -1815,9 +1721,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "accessToken"
-        ]
+        "required": ["accessToken"]
       },
       "RefreshAuthResponseDto": {
         "type": "object",
@@ -1826,9 +1730,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "accessToken"
-        ]
+        "required": ["accessToken"]
       },
       "Session": {
         "type": "object",
@@ -2030,9 +1932,7 @@
             "type": "number"
           }
         },
-        "required": [
-          "data"
-        ]
+        "required": ["data"]
       },
       "ConnectUserRoleDto": {
         "type": "object",
@@ -2041,9 +1941,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "userRoleId"
-        ]
+        "required": ["userRoleId"]
       },
       "CreateUserRolesRelationInputDto": {
         "type": "object",
@@ -2055,9 +1953,7 @@
             }
           }
         },
-        "required": [
-          "connect"
-        ]
+        "required": ["connect"]
       },
       "ConnectSessionDto": {
         "type": "object",
@@ -2066,9 +1962,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "sessionId"
-        ]
+        "required": ["sessionId"]
       },
       "CreateUserSessionsRelationInputDto": {
         "type": "object",
@@ -2080,9 +1974,7 @@
             }
           }
         },
-        "required": [
-          "connect"
-        ]
+        "required": ["connect"]
       },
       "CreateUserDto": {
         "type": "object",
@@ -2112,13 +2004,7 @@
             "$ref": "#/components/schemas/CreateUserSessionsRelationInputDto"
           }
         },
-        "required": [
-          "firstName",
-          "lastName",
-          "email",
-          "password",
-          "salt"
-        ]
+        "required": ["firstName", "lastName", "email", "password", "salt"]
       },
       "UpdateUserRolesRelationInputDto": {
         "type": "object",
@@ -2130,9 +2016,7 @@
             }
           }
         },
-        "required": [
-          "connect"
-        ]
+        "required": ["connect"]
       },
       "UpdateUserSessionsRelationInputDto": {
         "type": "object",
@@ -2144,9 +2028,7 @@
             }
           }
         },
-        "required": [
-          "connect"
-        ]
+        "required": ["connect"]
       },
       "UpdateUserDto": {
         "type": "object",
@@ -2187,9 +2069,7 @@
             "type": "number"
           }
         },
-        "required": [
-          "data"
-        ]
+        "required": ["data"]
       },
       "ConnectUserDto": {
         "type": "object",
@@ -2198,9 +2078,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "userId"
-        ]
+        "required": ["userId"]
       },
       "CreateSessionUserRelationInputDto": {
         "type": "object",
@@ -2209,9 +2087,7 @@
             "$ref": "#/components/schemas/ConnectUserDto"
           }
         },
-        "required": [
-          "connect"
-        ]
+        "required": ["connect"]
       },
       "CreateSessionDto": {
         "type": "object",
@@ -2223,9 +2099,7 @@
             "$ref": "#/components/schemas/CreateSessionUserRelationInputDto"
           }
         },
-        "required": [
-          "user"
-        ]
+        "required": ["user"]
       },
       "UpdateSessionUserRelationInputDto": {
         "type": "object",
@@ -2234,9 +2108,7 @@
             "$ref": "#/components/schemas/ConnectUserDto"
           }
         },
-        "required": [
-          "connect"
-        ]
+        "required": ["connect"]
       },
       "UpdateSessionDto": {
         "type": "object",
@@ -2259,9 +2131,7 @@
             "type": "number"
           }
         },
-        "required": [
-          "data"
-        ]
+        "required": ["data"]
       },
       "CreateRoleUsersRelationInputDto": {
         "type": "object",
@@ -2273,9 +2143,7 @@
             }
           }
         },
-        "required": [
-          "connect"
-        ]
+        "required": ["connect"]
       },
       "CreateRoleDto": {
         "type": "object",
@@ -2290,9 +2158,7 @@
             "$ref": "#/components/schemas/CreateRoleUsersRelationInputDto"
           }
         },
-        "required": [
-          "name"
-        ]
+        "required": ["name"]
       },
       "UpdateRoleUsersRelationInputDto": {
         "type": "object",
@@ -2304,9 +2170,7 @@
             }
           }
         },
-        "required": [
-          "connect"
-        ]
+        "required": ["connect"]
       },
       "UpdateRoleDto": {
         "type": "object",
@@ -2332,9 +2196,7 @@
             "type": "number"
           }
         },
-        "required": [
-          "data"
-        ]
+        "required": ["data"]
       },
       "CreateUserRoleUserRelationInputDto": {
         "type": "object",
@@ -2343,9 +2205,7 @@
             "$ref": "#/components/schemas/ConnectUserDto"
           }
         },
-        "required": [
-          "connect"
-        ]
+        "required": ["connect"]
       },
       "ConnectRoleDto": {
         "type": "object",
@@ -2354,9 +2214,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "roleId"
-        ]
+        "required": ["roleId"]
       },
       "CreateUserRoleRoleRelationInputDto": {
         "type": "object",
@@ -2365,9 +2223,7 @@
             "$ref": "#/components/schemas/ConnectRoleDto"
           }
         },
-        "required": [
-          "connect"
-        ]
+        "required": ["connect"]
       },
       "CreateUserRoleDto": {
         "type": "object",
@@ -2382,10 +2238,7 @@
             "$ref": "#/components/schemas/CreateUserRoleRoleRelationInputDto"
           }
         },
-        "required": [
-          "user",
-          "role"
-        ]
+        "required": ["user", "role"]
       },
       "UpdateUserRoleUserRelationInputDto": {
         "type": "object",
@@ -2394,9 +2247,7 @@
             "$ref": "#/components/schemas/ConnectUserDto"
           }
         },
-        "required": [
-          "connect"
-        ]
+        "required": ["connect"]
       },
       "UpdateUserRoleRoleRelationInputDto": {
         "type": "object",
@@ -2405,9 +2256,7 @@
             "$ref": "#/components/schemas/ConnectRoleDto"
           }
         },
-        "required": [
-          "connect"
-        ]
+        "required": ["connect"]
       },
       "UpdateUserRoleDto": {
         "type": "object",
@@ -2576,9 +2425,7 @@
             "type": "number"
           }
         },
-        "required": [
-          "data"
-        ]
+        "required": ["data"]
       },
       "ConnectJobDto": {
         "type": "object",
@@ -2587,9 +2434,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "jobId"
-        ]
+        "required": ["jobId"]
       },
       "CreatePersonJobRelationInputDto": {
         "type": "object",
@@ -2598,9 +2443,7 @@
             "$ref": "#/components/schemas/ConnectJobDto"
           }
         },
-        "required": [
-          "connect"
-        ]
+        "required": ["connect"]
       },
       "ConnectCompanyDto": {
         "type": "object",
@@ -2609,9 +2452,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "companyId"
-        ]
+        "required": ["companyId"]
       },
       "CreatePersonCompanyRelationInputDto": {
         "type": "object",
@@ -2620,9 +2461,7 @@
             "$ref": "#/components/schemas/ConnectCompanyDto"
           }
         },
-        "required": [
-          "connect"
-        ]
+        "required": ["connect"]
       },
       "CreatePersonDto": {
         "type": "object",
@@ -2665,9 +2504,7 @@
             "$ref": "#/components/schemas/ConnectJobDto"
           }
         },
-        "required": [
-          "connect"
-        ]
+        "required": ["connect"]
       },
       "UpdatePersonCompanyRelationInputDto": {
         "type": "object",
@@ -2676,9 +2513,7 @@
             "$ref": "#/components/schemas/ConnectCompanyDto"
           }
         },
-        "required": [
-          "connect"
-        ]
+        "required": ["connect"]
       },
       "UpdatePersonDto": {
         "type": "object",
@@ -2716,9 +2551,7 @@
             "type": "number"
           }
         },
-        "required": [
-          "data"
-        ]
+        "required": ["data"]
       },
       "ConnectPersonDto": {
         "type": "object",
@@ -2727,9 +2560,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "personId"
-        ]
+        "required": ["personId"]
       },
       "CreateCompanyPeopleRelationInputDto": {
         "type": "object",
@@ -2741,9 +2572,7 @@
             }
           }
         },
-        "required": [
-          "connect"
-        ]
+        "required": ["connect"]
       },
       "CreateCompanyDto": {
         "type": "object",
@@ -2758,9 +2587,7 @@
             "$ref": "#/components/schemas/CreateCompanyPeopleRelationInputDto"
           }
         },
-        "required": [
-          "name"
-        ]
+        "required": ["name"]
       },
       "UpdateCompanyPeopleRelationInputDto": {
         "type": "object",
@@ -2772,9 +2599,7 @@
             }
           }
         },
-        "required": [
-          "connect"
-        ]
+        "required": ["connect"]
       },
       "UpdateCompanyDto": {
         "type": "object",
@@ -2800,9 +2625,7 @@
             "type": "number"
           }
         },
-        "required": [
-          "data"
-        ]
+        "required": ["data"]
       },
       "CreateJobPeopleRelationInputDto": {
         "type": "object",
@@ -2814,9 +2637,7 @@
             }
           }
         },
-        "required": [
-          "connect"
-        ]
+        "required": ["connect"]
       },
       "CreateJobDto": {
         "type": "object",
@@ -2831,9 +2652,7 @@
             "$ref": "#/components/schemas/CreateJobPeopleRelationInputDto"
           }
         },
-        "required": [
-          "name"
-        ]
+        "required": ["name"]
       },
       "UpdateJobPeopleRelationInputDto": {
         "type": "object",
@@ -2845,9 +2664,7 @@
             }
           }
         },
-        "required": [
-          "connect"
-        ]
+        "required": ["connect"]
       },
       "UpdateJobDto": {
         "type": "object",

@@ -1,5 +1,3 @@
-
-  export class ConnectPersonDto {
-    personId: string;
-  }
-  
+export class ConnectPersonDto {
+  personId: string;
+}

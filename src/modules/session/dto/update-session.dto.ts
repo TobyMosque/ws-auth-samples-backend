@@ -1,12 +1,11 @@
-
-import {ApiExtraModels} from '@nestjs/swagger'
-import {ConnectUserDto} from '../../user/dto/connect-user.dto'
+import { ApiExtraModels } from '@nestjs/swagger';
+import { ConnectUserDto } from '../../user/dto/connect-user.dto';
 
 export class UpdateSessionUserRelationInputDto {
-    connect: ConnectUserDto;
-  }
+  connect: ConnectUserDto;
+}
 
-@ApiExtraModels(ConnectUserDto,UpdateSessionUserRelationInputDto)
+@ApiExtraModels(ConnectUserDto, UpdateSessionUserRelationInputDto)
 export class UpdateSessionDto {
   refreshId?: string;
   user?: UpdateSessionUserRelationInputDto;
