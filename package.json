@@ -19,7 +19,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "openapi:json": "GENERATE_OPENAPI_CLIENT=true nest start",
+    "openapi:json": "ENV=dev GENERATE_OPENAPI_CLIENT=true nest start",
     "openapi:generate": "openapi-generator-cli generate -i ./swagger.json -g typescript-axios -o ../api --skip-validate-spec --additional-properties=npmName=api,npmVersion=\"1.0.0\"",
     "openapi": "yarn openapi:json || yarn openapi:generate",
     "prettier": "prettier . --write"

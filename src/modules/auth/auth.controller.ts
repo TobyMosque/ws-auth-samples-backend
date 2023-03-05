@@ -25,7 +25,7 @@ function cookieOptions(): CookieOptions {
   expires.setDate(expires.getDate() + 1);
   return {
     path: [getPreffix(), 'auth', 'refresh'].join('/'),
-    // secure: true,
+    secure: true,
     sameSite: 'lax',
     httpOnly: true,
     expires: expires,
@@ -42,6 +42,7 @@ export class AuthController {
   @Post('login')
   @ApiBody({ type: LoginAuthDto })
   @ApiQuery({ name: 'flow', enum: FlowType })
+  @ApiQuery({ name: 'rotation', type: 'boolean' })
   async login(
     @Req() req: RequestAuthDto,
     @Query() qs: { flow: FlowType; rotation: boolean },

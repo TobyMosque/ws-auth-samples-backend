@@ -112,9 +112,11 @@ export class AuthService {
     } catch (err) {
       isValid = false;
     }
+
     if (!isValid) {
       return res;
     }
+
     const payload = this.jwtService.decode(refreshToken);
     if (typeof payload === 'string' || !('jti' in payload)) {
       return res;
@@ -124,6 +126,7 @@ export class AuthService {
     const session = await this.sessionService.find(payload.jti, {
       select: {
         sessionId: true,
+        refreshId: true,
         userId: true,
         user: {
           select: {
@@ -143,6 +146,7 @@ export class AuthService {
         },
       },
     });
+
     if (!session?.sessionId) {
       return res;
     }
