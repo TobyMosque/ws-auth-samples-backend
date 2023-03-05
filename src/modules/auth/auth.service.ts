@@ -168,10 +168,6 @@ export class AuthService {
     );
 
     if (rotation) {
-      res.accessToken = this.jwtService.sign(
-        _user,
-        Object.assign(options, jwtOptions),
-      );
       const refresh = uid();
       await this.sessionService.update(session.sessionId, {
         refreshId: refresh,
